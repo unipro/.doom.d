@@ -4,10 +4,18 @@
 ;; sync' after modifying this file!
 
 
+;; Bootstrap config
+(defconst *is-a-mac* (eq system-type 'darwin))
+(defconst *is-a-win-nt* (eq system-type 'windows-nt))
+
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
 (setq user-full-name "Byungwan Jun"
       user-mail-address "unipro.kr@gmail.com")
+
+;; Default frame size
+(add-to-list 'default-frame-alist '(height . 70))
+(add-to-list 'default-frame-alist '(width . 204))
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
@@ -35,9 +43,60 @@
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
 
+;; exec-path, PATH
+(defun add-to-path (path)
+  "Add the path directory to the `exec-path' and `PATH' variables."
+  (when (file-directory-p path)
+    (let ((path-env (getenv "PATH")))
+        (when (not (cl-search path path-env))
+       (setenv "PATH" (concat path ":" path-env))))
+    (add-to-list 'exec-path path)))
+
+(defconst home-bin-path (expand-file-name "bin" "~"))
+(defconst home-local-bin-path (expand-file-name ".local/bin" "~"))
+
+(add-to-path home-bin-path)
+(add-to-path home-local-bin-path)
+
 ;; Fix issues after installing Emacs 27.1 on macOS
 (setq default-directory "~/")
 (setq command-line-default-directory "~/")
+
+;; Enable korean input
+(setq default-input-method "korean-hangul")
+(global-set-key (kbd "S-SPC") 'toggle-input-method)
+
+;; Quickly switch windows
+(use-package ace-window
+  :ensure t
+  :bind (("M-p" . ace-window)
+         ("C-x o" . ace-window)))
+
+;; Fonts
+(when (display-graphic-p)
+  (let ((fontset "fontset-default"))
+    (cond ((member "Droid Sans Mono" (font-family-list))
+           (set-fontset-font fontset 'unicode "Droid Sans Mono")
+           (set-face-font 'default "Droid Sans Mono"))
+          ((member "DejaVu Sans Mono" (font-family-list))
+           (set-fontset-font fontset 'unicode "DejaVu Sans Mono")
+           (set-face-font 'default "DejaVu Sans Mono"))
+          (t
+           (message "'Droid Sans Mono' or 'DejaVu Sans Mono' are not installed")))
+    (cond ((member "D2Coding" (font-family-list))
+           (set-fontset-font fontset 'hangul
+                             '("D2Coding" . "unicode-bmp")))
+          ((member "NanumGothicCoding" (font-family-list))
+           (set-fontset-font fontset 'hangul
+                             '("NanumGothicCoding" . "unicode-bmp")))
+          ((member "나눔고딕코딩" (font-family-list))
+           (set-fontset-font fontset 'hangul
+                             '("나눔고딕코딩" . "unicode-bmp")))
+          ((member "나눔고딕코딩" (font-family-list))
+           (set-fontset-font fontset 'hangul
+                             '("나눔고딕코딩" . "unicode-bmp")))
+          (t
+           (message "'D2Coding' or 'NanumGothicCoding' are not installed")))))
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
