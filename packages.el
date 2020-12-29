@@ -6,6 +6,8 @@
 ;; use 'M-x doom/reload'.
 
 
+(package! ace-window)
+
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)
 

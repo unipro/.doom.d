@@ -67,8 +67,7 @@
 (global-set-key (kbd "S-SPC") 'toggle-input-method)
 
 ;; Quickly switch windows
-(use-package ace-window
-  :ensure t
+(use-package! ace-window
   :bind (("M-p" . ace-window)
          ("C-x o" . ace-window)))
 
