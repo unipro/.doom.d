@@ -98,6 +98,9 @@
   (:map global-map
    ("M-0" . treemacs-select-window)))
 
+;; realgud-lldb
+(use-package! realgud-lldb)
+
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
 ;; - `load!' for loading external *.el files relative to this one

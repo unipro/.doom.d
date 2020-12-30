@@ -6,6 +6,10 @@
 ;; use 'M-x doom/reload'.
 
 
+;; realgud-lldb
+(when (package! realgud)
+  (package! realgud-lldb))
+
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)
 
