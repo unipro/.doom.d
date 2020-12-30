@@ -92,6 +92,12 @@
           (t
            (message "'D2Coding' or 'NanumGothicCoding' are not installed")))))
 
+;; treemacs
+(use-package! treemacs
+  :bind
+  (:map global-map
+   ("M-0" . treemacs-select-window)))
+
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
 ;; - `load!' for loading external *.el files relative to this one
