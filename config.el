@@ -96,7 +96,9 @@
 (use-package! treemacs
   :bind
   (:map global-map
-   ("M-0" . treemacs-select-window)))
+   ("M-0" . treemacs-select-window))
+  :config
+  (add-to-list 'treemacs-pre-file-insert-predicates #'treemacs-is-file-git-ignored?))
 
 ;; realgud-lldb
 (use-package! realgud-lldb)
