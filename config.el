@@ -104,6 +104,10 @@
 ;; realgud-lldb
 (use-package! realgud-lldb)
 
+;; unset the backends for a sh mode
+(after! sh-script
+  (set-company-backend! 'sh-mode nil))
+
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
 ;; - `load!' for loading external *.el files relative to this one
