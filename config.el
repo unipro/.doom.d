@@ -101,6 +101,11 @@
   :config
   (add-to-list 'treemacs-pre-file-insert-predicates #'treemacs-is-file-git-ignored?))
 
+;; js2-mode
+(use-package! js2-mode
+  :init
+  (add-hook 'js2-mode-hook (lambda () (setq js2-basic-offset 4))))
+
 ;; realgud-lldb
 (use-package! realgud-lldb)
 
