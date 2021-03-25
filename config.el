@@ -93,13 +93,21 @@
           (t
            (message "'D2Coding' or 'NanumGothicCoding' are not installed")))))
 
-;; treemacs
-(use-package! treemacs
+;; neotree
+(use-package! neotree
   :bind
   (:map global-map
-   ("M-0" . treemacs-select-window))
-  :config
-  (add-to-list 'treemacs-pre-file-insert-predicates #'treemacs-is-file-git-ignored?))
+   ("M-0" . neotree-show))
+  :init
+  (setq projectile-switch-project-action 'neotree-projectile-action))
+
+;; treemacs
+;; (use-package! treemacs
+;;   :bind
+;;   (:map global-map
+;;    ("M-0" . treemacs-select-window))
+;;   :config
+;;   (add-to-list 'treemacs-pre-file-insert-predicates #'treemacs-is-file-git-ignored?))
 
 ;; js2-mode
 (use-package! js2-mode
