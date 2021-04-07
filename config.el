@@ -29,6 +29,28 @@
 ;; font string. You generally only need these two:
 ;; (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
 ;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
+(when (display-graphic-p)
+  (let ((fontset "fontset-default"))
+    (cond ((member "Droid Sans Mono" (font-family-list))
+           (setq doom-font (font-spec :family "Droid Sans Mono")))
+          ((member "DejaVu Sans Mono" (font-family-list))
+           (setq doom-font (font-spec :family "DejaVu Sans Mono")))
+          (t
+           (message "'Droid Sans Mono' or 'DejaVu Sans Mono' are not installed")))
+    (cond ((member "D2Coding" (font-family-list))
+           (set-fontset-font fontset 'hangul
+                             '("D2Coding" . "unicode-bmp")))
+          ((member "NanumGothicCoding" (font-family-list))
+           (set-fontset-font fontset 'hangul
+                             '("NanumGothicCoding" . "unicode-bmp")))
+          ((member "나눔고딕코딩" (font-family-list))
+           (set-fontset-font fontset 'hangul
+                             '("나눔고딕코딩" . "unicode-bmp")))
+          ((member "나눔고딕코딩" (font-family-list))
+           (set-fontset-font fontset 'hangul
+                             '("나눔고딕코딩" . "unicode-bmp")))
+          (t
+           (message "'D2Coding' or 'NanumGothicCoding' are not installed")))))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -69,47 +91,21 @@
 (setq default-input-method "korean-hangul")
 (global-set-key (kbd "S-SPC") 'toggle-input-method)
 
-;; Fonts
-(when (display-graphic-p)
-  (let ((fontset "fontset-default"))
-    (cond ((member "Droid Sans Mono" (font-family-list))
-           (set-fontset-font fontset 'unicode "Droid Sans Mono")
-           (set-face-font 'default "Droid Sans Mono"))
-          ((member "DejaVu Sans Mono" (font-family-list))
-           (set-fontset-font fontset 'unicode "DejaVu Sans Mono")
-           (set-face-font 'default "DejaVu Sans Mono"))
-          (t
-           (message "'Droid Sans Mono' or 'DejaVu Sans Mono' are not installed")))
-    (cond ((member "D2Coding" (font-family-list))
-           (set-fontset-font fontset 'hangul
-                             '("D2Coding" . "unicode-bmp")))
-          ((member "NanumGothicCoding" (font-family-list))
-           (set-fontset-font fontset 'hangul
-                             '("NanumGothicCoding" . "unicode-bmp")))
-          ((member "나눔고딕코딩" (font-family-list))
-           (set-fontset-font fontset 'hangul
-                             '("나눔고딕코딩" . "unicode-bmp")))
-          ((member "나눔고딕코딩" (font-family-list))
-           (set-fontset-font fontset 'hangul
-                             '("나눔고딕코딩" . "unicode-bmp")))
-          (t
-           (message "'D2Coding' or 'NanumGothicCoding' are not installed")))))
-
 ;; neotree
-(use-package! neotree
-  :bind
-  (:map global-map
-   ("M-0" . neotree-show))
-  :init
-  (setq projectile-switch-project-action 'neotree-projectile-action))
-
-;; treemacs
-;; (use-package! treemacs
+;; (use-package! neotree
 ;;   :bind
 ;;   (:map global-map
-;;    ("M-0" . treemacs-select-window))
-;;   :config
-;;   (add-to-list 'treemacs-pre-file-insert-predicates #'treemacs-is-file-git-ignored?))
+;;    ("M-0" . neotree-show))
+;;   :init
+;;   (setq projectile-switch-project-action 'neotree-projectile-action))
+
+;; treemacs
+(use-package! treemacs
+  :bind
+  (:map global-map
+   ("M-0" . treemacs-select-window))
+  :config
+  (add-to-list 'treemacs-pre-file-insert-predicates #'treemacs-is-file-git-ignored?))
 
 ;; js2-mode
 (use-package! js2-mode
