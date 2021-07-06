@@ -115,6 +115,17 @@
 ;; realgud-lldb
 (use-package! realgud-lldb)
 
+;; paredit
+(use-package! paredit
+  :init
+  (use-package! paredit-everywhere))
+
+(add-hook! lisp-mode (paredit-mode t))
+(add-hook! lisp-interaction-mode (paredit-mode t))
+
+(add-hook! emacs-lisp-mode (paredit-mode t))
+(add-hook! ielm-mode (paredit-mode t))
+
 ;; unset the backends for a sh mode
 (after! sh-script
   (set-company-backend! 'sh-mode nil))

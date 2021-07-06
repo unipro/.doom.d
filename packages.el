@@ -7,8 +7,11 @@
 
 
 ;; realgud-lldb
-(when (package! realgud)
-  (package! realgud-lldb))
+(package! realgud-lldb)
+
+;; paredit
+(when (package! paredit)
+  (package! paredit-everywhere))
 
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)
