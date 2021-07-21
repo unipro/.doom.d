@@ -68,20 +68,20 @@
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
 
-;; exec-path, PATH
-(defun add-to-path (path)
-  "Add the path directory to the `exec-path' and `PATH' variables."
-  (when (file-directory-p path)
-    (let ((path-env (getenv "PATH")))
-        (when (not (cl-search path path-env))
-       (setenv "PATH" (concat path ":" path-env))))
-    (add-to-list 'exec-path path)))
+;; ;; exec-path, PATH
+;; (defun add-to-path (path)
+;;   "Add the path directory to the `exec-path' and `PATH' variables."
+;;   (when (file-directory-p path)
+;;     (let ((path-env (getenv "PATH")))
+;;         (when (not (cl-search path path-env))
+;;        (setenv "PATH" (concat path ":" path-env))))
+;;     (add-to-list 'exec-path path)))
 
-(defconst home-bin-path (expand-file-name "bin" "~"))
-(defconst home-local-bin-path (expand-file-name ".local/bin" "~"))
+;; (defconst home-bin-path (expand-file-name "bin" "~"))
+;; (defconst home-local-bin-path (expand-file-name ".local/bin" "~"))
 
-(add-to-path home-bin-path)
-(add-to-path home-local-bin-path)
+;; (add-to-path home-bin-path)
+;; (add-to-path home-local-bin-path)
 
 ;; Fix issues after installing Emacs 27.1 on macOS
 (setq default-directory "~/")
