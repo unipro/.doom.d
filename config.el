@@ -83,6 +83,30 @@
 ;; (add-to-path home-bin-path)
 ;; (add-to-path home-local-bin-path)
 
+;; coding-system
+(require 'ucs-normalize)
+(set-language-environment "UTF-8")
+(prefer-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(setq-default buffer-file-coding-system 'utf-8)
+(setq-default coding-system-for-write 'utf-8)
+(cond (*is-a-win-nt*
+       (setq-default coding-system-for-read 'utf-8) ; XXX 'utf-16-le
+       (set-clipboard-coding-system 'utf-16-le)
+       (set-selection-coding-system 'utf-16-le))
+      (*is-a-mac*
+       (setq-default coding-system-for-read 'utf-8-hfs)
+       (set-clipboard-coding-system 'utf-8-hfs)
+       (set-selection-coding-system 'utf-8-hfs)
+       (set-file-name-coding-system 'utf-8-hfs)
+       (setq default-process-coding-system '(utf-8-hfs . utf-8-hfs)))
+      (t  ; linux
+       (setq-default coding-system-for-read 'utf-8)
+       (setq x-select-request-type
+             '(UTF8_STRING COMPOUND_TEXT TEXT STRING))))
+
 ;; Enable korean input
 (setq default-input-method "korean-hangul")
 (global-set-key (kbd "S-SPC") 'toggle-input-method)
