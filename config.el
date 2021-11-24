@@ -83,10 +83,6 @@
 ;; (add-to-path home-bin-path)
 ;; (add-to-path home-local-bin-path)
 
-;; Fix issues after installing Emacs 27.1 on macOS
-(setq default-directory "~/")
-(setq command-line-default-directory "~/")
-
 ;; Enable korean input
 (setq default-input-method "korean-hangul")
 (global-set-key (kbd "S-SPC") 'toggle-input-method)
