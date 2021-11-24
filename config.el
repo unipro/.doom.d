@@ -17,40 +17,26 @@
 (add-to-list 'default-frame-alist '(height . 70))
 (add-to-list 'default-frame-alist '(width . 204))
 
-;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
-;; are the three important ones:
-;;
-;; + `doom-font'
-;; + `doom-variable-pitch-font'
-;; + `doom-big-font' -- used for `doom-big-font-mode'; use this for
-;;   presentations or streaming.
-;;
-;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
-;; font string. You generally only need these two:
-;; (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
-;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
-(when (display-graphic-p)
-  (let ((fontset "fontset-default"))
+;; Default fonts
+(defun my-init-fonts ()
+  (when (display-graphic-p)
+    ;; Default Latin font
     (cond ((member "Droid Sans Mono" (font-family-list))
-           (setq doom-font (font-spec :family "Droid Sans Mono")))
+           (set-face-attribute 'default nil :family "Droid Sans Mono"))
           ((member "DejaVu Sans Mono" (font-family-list))
-           (setq doom-font (font-spec :family "DejaVu Sans Mono")))
+           (set-face-attribute 'default nil :family "DejaVu Sans Mono"))
           (t
            (message "'Droid Sans Mono' or 'DejaVu Sans Mono' are not installed")))
+    ;; Font size
+    (set-face-attribute 'default nil :height 140)
+    ;; Default Korean font
     (cond ((member "D2Coding" (font-family-list))
-           (set-fontset-font fontset 'hangul
-                             '("D2Coding" . "unicode-bmp")))
+           (set-fontset-font t 'hangul (font-spec :name "D2Coding")))
           ((member "NanumGothicCoding" (font-family-list))
-           (set-fontset-font fontset 'hangul
-                             '("NanumGothicCoding" . "unicode-bmp")))
-          ((member "나눔고딕코딩" (font-family-list))
-           (set-fontset-font fontset 'hangul
-                             '("나눔고딕코딩" . "unicode-bmp")))
-          ((member "나눔고딕코딩" (font-family-list))
-           (set-fontset-font fontset 'hangul
-                             '("나눔고딕코딩" . "unicode-bmp")))
+           (set-fontset-font t 'hangul (font-spec :name "NanumGothicCoding")))
           (t
            (message "'D2Coding' or 'NanumGothicCoding' are not installed")))))
+(add-hook 'after-setting-font-hook #'my-init-fonts)
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
