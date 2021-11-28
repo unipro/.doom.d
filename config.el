@@ -119,7 +119,7 @@
   (add-hook 'js2-mode-hook (lambda () (setq js2-basic-offset 4))))
 
 ;; realgud-lldb
-;; (use-package! realgud-lldb)
+(use-package! realgud-lldb)
 
 ;; paredit
 (use-package! paredit

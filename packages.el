@@ -7,7 +7,7 @@
 
 
 ;; realgud-lldb
-;; (package! realgud-lldb)
+(package! realgud-lldb)
 
 ;; paredit
 (when (package! paredit)
