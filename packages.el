@@ -13,6 +13,9 @@
 (when (package! paredit)
   (package! paredit-everywhere))
 
+;; nginx-mode
+(package! nginx-mode)
+
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)
 
