@@ -17,6 +17,11 @@
 (add-to-list 'default-frame-alist '(height . 70))
 (add-to-list 'default-frame-alist '(width . 204))
 
+
+;; Changing the leader prefixes
+(setq doom-leader-alt-key "<F13>"
+      doom-localleader-alt-key "<F14>")
+
 ;; Default fonts
 (defun my-init-fonts ()
   (when (display-graphic-p)
