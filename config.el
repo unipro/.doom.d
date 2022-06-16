@@ -141,6 +141,10 @@
 (after! sh-script
   (set-company-backend! 'sh-mode nil))
 
+;; add some keybindings
+(when IS-MAC
+  (map! "s-c" #'kill-ring-save
+        "s-v" #'yank))
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
