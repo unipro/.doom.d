@@ -3,11 +3,6 @@
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 
-
-;; Bootstrap config
-(defconst *is-a-mac* (eq system-type 'darwin))
-(defconst *is-a-win-nt* (eq system-type 'windows-nt))
-
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
 (setq user-full-name "Byungwan Jun"
@@ -17,6 +12,65 @@
 (add-to-list 'default-frame-alist '(height . 70))
 (add-to-list 'default-frame-alist '(width . 204))
 
+(defvar +default-want-RET-continue-comments t
+  "If non-nil, RET will continue commented lines.")
+
+(defvar +default-minibuffer-maps
+  (append '(minibuffer-local-map
+            minibuffer-local-ns-map
+            minibuffer-local-completion-map
+            minibuffer-local-must-match-map
+            minibuffer-local-isearch-map
+            read-expression-map)
+          (cond ((featurep! :completion ivy)
+                 '(ivy-minibuffer-map
+                   ivy-switch-buffer-map))
+                ((featurep! :completion helm)
+                 '(helm-map
+                   helm-rg-map
+                   helm-read-file-map))))
+  "A list of all the keymaps used for the minibuffer.")
+
+;; OS specific fixes
+(when IS-MAC
+  ;; Fix MacOS shift+tab
+  (define-key key-translation-map [S-iso-lefttab] [backtab])
+  ;; Fix conventional OS keys in Emacs
+  (map! "s-`" #'other-frame  ; fix frame-switching
+        ;; fix OS window/frame navigation/manipulation keys
+        "s-w" #'delete-window
+        "s-W" #'delete-frame
+        "s-n" #'+default/new-buffer
+        "s-N" #'make-frame
+        "s-q" (if (daemonp) #'delete-frame #'save-buffers-kill-terminal)
+        "C-s-f" #'toggle-frame-fullscreen
+        ;; Restore somewhat common navigation
+        "s-l" #'goto-line
+        ;; Restore OS undo, save, copy, & paste keys (without cua-mode, because
+        ;; it imposes some other functionality and overhead we don't need)
+        "s-f" (if (featurep! :completion vertico) #'consult-line #'swiper)
+        "s-z" #'undo
+        "s-Z" #'redo
+        "s-c" (if (featurep 'evil) #'evil-yank #'copy-region-as-kill)
+        "s-v" #'yank
+        "s-s" #'save-buffer
+        "s-x" #'execute-extended-command
+        :v "s-x" #'kill-region
+        ;; Buffer-local font scaling
+        "s-+" #'doom/reset-font-size
+        "s-=" #'doom/increase-font-size
+        "s--" #'doom/decrease-font-size
+        ;; Conventional text-editing keys & motions
+        "s-a" #'mark-whole-buffer
+        "s-/" (cmd! (save-excursion (comment-line 1)))
+        :n "s-/" #'evilnc-comment-or-uncomment-lines
+        :v "s-/" #'evilnc-comment-operator
+        :gi  [s-backspace] #'doom/backward-kill-to-bol-and-indent
+        :gi  [s-left]      #'doom/backward-to-bol-or-indent
+        :gi  [s-right]     #'doom/forward-to-last-non-comment-or-eol
+        :gi  [M-backspace] #'backward-kill-word
+        :gi  [M-left]      #'backward-word
+        :gi  [M-right]     #'forward-word))
 
 ;; Changing the leader prefixes
 (setq doom-leader-alt-key "<F13>"
@@ -57,22 +111,7 @@
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type t)
-
-;; ;; exec-path, PATH
-;; (defun add-to-path (path)
-;;   "Add the path directory to the `exec-path' and `PATH' variables."
-;;   (when (file-directory-p path)
-;;     (let ((path-env (getenv "PATH")))
-;;         (when (not (cl-search path path-env))
-;;        (setenv "PATH" (concat path ":" path-env))))
-;;     (add-to-list 'exec-path path)))
-
-;; (defconst home-bin-path (expand-file-name "bin" "~"))
-;; (defconst home-local-bin-path (expand-file-name ".local/bin" "~"))
-
-;; (add-to-path home-bin-path)
-;; (add-to-path home-local-bin-path)
+(setq display-line-numbers-type nil)
 
 ;; coding-system
 (require 'ucs-normalize)
@@ -83,11 +122,11 @@
 (set-terminal-coding-system 'utf-8)
 (setq-default buffer-file-coding-system 'utf-8)
 (setq-default coding-system-for-write 'utf-8)
-(cond (*is-a-win-nt*
+(cond (IS-WINDOWS
        (setq-default coding-system-for-read 'utf-8) ; XXX 'utf-16-le
        (set-clipboard-coding-system 'utf-16-le)
        (set-selection-coding-system 'utf-16-le))
-      (*is-a-mac*
+      (IS-MAC
        (setq-default coding-system-for-read 'utf-8-hfs)
        (set-clipboard-coding-system 'utf-8-hfs)
        (set-selection-coding-system 'utf-8-hfs)
@@ -102,13 +141,20 @@
 (setq default-input-method "korean-hangul")
 (global-set-key (kbd "S-SPC") 'toggle-input-method)
 
-;; neotree
-;; (use-package! neotree
-;;   :bind
-;;   (:map global-map
-;;    ("M-0" . neotree-show))
-;;   :init
-;;   (setq projectile-switch-project-action 'neotree-projectile-action))
+(setq avy-all-windows nil
+      avy-all-windows-alt t
+      avy-background t
+      ;; the unpredictability of this (when enabled) makes it a poor default
+      avy-single-candidate-jump nil)
+
+(after! woman
+  ;; The woman-manpath default value does not necessarily match man. If we have
+  ;; man available but aren't using it for performance reasons, we can extract
+  ;; it's manpath.
+  (when (executable-find "man")
+    (setq woman-manpath
+          (split-string (cdr (doom-call-process "man" "--path"))
+                        path-separator t))))
 
 ;; treemacs
 (use-package! treemacs
@@ -140,11 +186,6 @@
 ;; unset the backends for a sh mode
 (after! sh-script
   (set-company-backend! 'sh-mode nil))
-
-;; add some keybindings
-(when IS-MAC
-  (map! "s-c" #'kill-ring-save
-        "s-v" #'yank))
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.

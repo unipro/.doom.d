@@ -6,6 +6,9 @@
 ;; use 'M-x doom/reload'.
 
 
+;; avy
+(package! avy)
+
 ;; realgud-lldb
 (package! realgud-lldb)
 
