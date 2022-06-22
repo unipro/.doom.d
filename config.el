@@ -141,12 +141,18 @@
 (setq default-input-method "korean-hangul")
 (global-set-key (kbd "S-SPC") 'toggle-input-method)
 
+;; avy
 (setq avy-all-windows nil
       avy-all-windows-alt t
       avy-background t
       ;; the unpredictability of this (when enabled) makes it a poor default
       avy-single-candidate-jump nil)
+(global-set-key (kbd "C-:") 'avy-goto-char)
+(global-set-key (kbd "C-'") 'avy-goto-char-2)
+(global-set-key (kbd "M-g f") 'avy-goto-line)
+(global-set-key (kbd "M-g w") 'avy-goto-word-1)
 
+;; man
 (after! woman
   ;; The woman-manpath default value does not necessarily match man. If we have
   ;; man available but aren't using it for performance reasons, we can extract
