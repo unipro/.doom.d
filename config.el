@@ -166,7 +166,7 @@
 (use-package! treemacs
   :bind
   (:map global-map
-   ("C-x O" . treemacs-select-window))
+   ("M-o" . treemacs-select-window))
   :config
   (add-to-list 'treemacs-pre-file-insert-predicates #'treemacs-is-file-git-ignored?))
 
