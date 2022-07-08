@@ -181,6 +181,14 @@
         flycheck-python-pycompile-executable "python3"
         doom-modeline-env-python-executable "python3"))
 
+(after! projectile
+  (projectile-register-project-type 'python-poetry '("poetry.lock")
+                                    :project-file "poetry.lock"
+                                    :compile "poetry build"
+                                    :test "poetry run pytest"
+                                    :test-prefix "test_"
+                                    :test-suffix "_test"))
+
 ;; realgud-lldb
 (use-package! realgud-lldb)
 
