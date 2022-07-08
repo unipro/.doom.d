@@ -175,6 +175,12 @@
   :init
   (add-hook 'js2-mode-hook (lambda () (setq js2-basic-offset 4))))
 
+;; python
+(after! python
+  (setq python-shell-interpreter "python3"
+        flycheck-python-pycompile-executable "python3"
+        doom-modeline-env-python-executable "python3"))
+
 ;; realgud-lldb
 (use-package! realgud-lldb)
 
