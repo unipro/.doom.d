@@ -19,6 +19,9 @@
 ;; nginx-mode
 (package! nginx-mode)
 
+;; javascript
+(package! rjsx-mode :recipe (:host github :repo "unipro/rjsx-mode" :branch "temp"))
+
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)
 
