@@ -175,8 +175,28 @@
 
 ;; js2-mode
 (use-package! js2-mode
+  :mode "\\.js\\'"
+  :config
+  (setq js-chain-indent t
+        js2-basic-offset 4
+        ;; Don't mishighlight shebang lines
+        js2-skip-preprocessor-directives t
+        ;; let flycheck handle this
+        js2-mode-show-parse-errors nil
+        js2-mode-show-strict-warnings nil
+        ;; Flycheck provides these features, so disable them: conflicting with
+        ;; the eslint settings.
+        js2-strict-missing-semi-warning nil
+        ;; maximum fontification
+        js2-highlight-level 3
+        js2-idle-timer-delay 0.15))
+
+(use-package! xref-js2
+  :when (modulep! :tools lookup)
   :init
-  (add-hook 'js2-mode-hook (lambda () (setq js2-basic-offset 4))))
+  (setq xref-js2-search-program 'rg)
+  (set-lookup-handlers! 'rjsx-mode
+    :xref-backend #'xref-js2-xref-backend))
 
 ;; python
 (after! python
