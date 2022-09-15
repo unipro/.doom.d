@@ -19,6 +19,9 @@
 ;; nginx-mode
 (package! nginx-mode)
 
+;; gnuplot
+(package! gnuplot-mode)
+
 ;; javascript
 ;; (package! rjsx-mode :recipe (:host github :repo "unipro/rjsx-mode" :branch "temp"))
 (disable-packages! rjsx-mode)
