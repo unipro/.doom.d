@@ -152,7 +152,9 @@
       avy-single-candidate-jump nil)
 (global-set-key (kbd "C-'") 'avy-goto-char)
 (global-set-key (kbd "C-\"") 'avy-goto-char-2)
-(global-set-key (kbd "M-g f") 'avy-goto-line)
+(global-set-key (kbd "M-g c") 'avy-goto-char)
+(global-set-key (kbd "M-g C") 'avy-goto-char-2)
+(global-set-key (kbd "M-g l") 'avy-goto-line)
 (global-set-key (kbd "M-g w") 'avy-goto-word-1)
 
 ;; man
