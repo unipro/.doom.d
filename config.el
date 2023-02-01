@@ -9,7 +9,7 @@
       user-mail-address "unipro.kr@gmail.com")
 
 ;; Default frame size
-(add-to-list 'default-frame-alist '(height . 100))
+(add-to-list 'default-frame-alist '(height . 80))
 (add-to-list 'default-frame-alist '(width . 204))
 
 (defvar +default-want-RET-continue-comments t
