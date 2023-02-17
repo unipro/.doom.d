@@ -175,6 +175,9 @@
   :config
   (add-to-list 'treemacs-pre-file-insert-predicates #'treemacs-is-file-git-ignored?))
 
+(after! (treemacs projectile)
+  (treemacs-project-follow-mode 1))
+
 ;; js2-mode
 (use-package! js2-mode
   :mode "\\.js\\'"
@@ -231,6 +234,12 @@
 ;; unset the backends for a sh mode
 (after! sh-script
   (set-company-backend! 'sh-mode nil))
+
+(use-package! focus)
+
+;; global beacon minor-mode
+ (use-package! beacon)
+ (after! beacon (beacon-mode 1))
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.

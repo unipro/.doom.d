@@ -26,6 +26,14 @@
 ;; (package! rjsx-mode :recipe (:host github :repo "unipro/rjsx-mode" :branch "temp"))
 (disable-packages! rjsx-mode)
 
+(disable-packages! company-shell)
+
+;; highlights the current cursor line after major movements
+(package! beacon)
+
+;; focus
+(package! focus)
+
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)
 
@@ -68,4 +76,3 @@
 ;(unpin! pinned-package another-pinned-package)
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
-(disable-packages! company-shell)
