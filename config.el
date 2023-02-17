@@ -22,10 +22,10 @@
             minibuffer-local-must-match-map
             minibuffer-local-isearch-map
             read-expression-map)
-          (cond ((featurep! :completion ivy)
+          (cond ((modulep! :completion ivy)
                  '(ivy-minibuffer-map
                    ivy-switch-buffer-map))
-                ((featurep! :completion helm)
+                ((modulep! :completion helm)
                  '(helm-map
                    helm-rg-map
                    helm-read-file-map))))
@@ -51,7 +51,7 @@
         "s-l" #'goto-line
         ;; Restore OS undo, save, copy, & paste keys (without cua-mode, because
         ;; it imposes some other functionality and overhead we don't need)
-        "s-f" (if (featurep! :completion vertico) #'consult-line #'swiper)
+        "s-f" (if (modulep! :completion vertico) #'consult-line #'swiper)
         "s-z" #'undo
         "s-Z" #'redo
         "s-c" (if (featurep 'evil) #'evil-yank #'copy-region-as-kill)
