@@ -90,7 +90,10 @@
           (t
            (message "'Droid Sans Mono' or 'DejaVu Sans Mono' are not installed")))
     ;; Font size
-    (set-face-attribute 'default nil :height 140)
+    (cond (IS-MAC
+           (set-face-attribute 'default nil :height 160))
+          (t
+           (set-face-attribute 'default nil :height 140)))
     ;; Default Korean font
     (cond ((member "D2Coding" (font-family-list))
            (set-fontset-font t 'hangul (font-spec :name "D2Coding")))
