@@ -111,6 +111,12 @@
     (setq doom-theme 'doom-solarized-light)
   (setq doom-theme nil))
 
+;; In Emacs 28 you can tell Emacs to jump to the first or last match in the buffer,
+;; with M-< and M->; or the next or previous match not currently visible
+;; with C-v and M-v.
+(when (>= emacs-major-version 28)
+  (setq isearch-allow-motion t))
+
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org/")
