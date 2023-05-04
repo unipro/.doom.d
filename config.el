@@ -247,8 +247,8 @@
 (use-package! focus)
 
 ;; global beacon minor-mode
- (use-package! beacon)
- (after! beacon (beacon-mode 1))
+(use-package! beacon)
+(after! beacon (beacon-mode 1))
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
