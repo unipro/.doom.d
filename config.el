@@ -166,6 +166,28 @@
 (global-set-key (kbd "M-g l") 'avy-goto-line)
 (global-set-key (kbd "M-g w") 'avy-goto-word-1)
 
+;; smartparens
+(use-package! smartparens
+  :config
+  ;; like paredit keybinding
+  (map! "M-(" #'sp-wrap-round
+        "M-s" #'sp-splice-sexp
+        "C-)" #'sp-forward-slurp-sexp
+        "C-}" #'sp-forward-barf-sexp
+        "C-(" #'sp-backward-slurp-sexp
+        "C-{" #'sp-backward-barf-sexp))
+
+;; ;; paredit
+;; (use-package! paredit
+;;   :init
+;;   (use-package! paredit-everywhere))
+
+;; (add-hook! lisp-mode (paredit-mode t))
+;; (add-hook! lisp-interaction-mode (paredit-mode t))
+
+;; (add-hook! emacs-lisp-mode (paredit-mode t))
+;; (add-hook! ielm-mode (paredit-mode t))
+
 ;; man
 (after! woman
   ;; The woman-manpath default value does not necessarily match man. If we have
@@ -228,17 +250,6 @@
 
 ;; realgud-lldb
 (use-package! realgud-lldb)
-
-;; ;; paredit
-;; (use-package! paredit
-;;   :init
-;;   (use-package! paredit-everywhere))
-
-;; (add-hook! lisp-mode (paredit-mode t))
-;; (add-hook! lisp-interaction-mode (paredit-mode t))
-
-;; (add-hook! emacs-lisp-mode (paredit-mode t))
-;; (add-hook! ielm-mode (paredit-mode t))
 
 ;; unset the backends for a sh mode
 (after! sh-script
