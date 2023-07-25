@@ -91,7 +91,7 @@
            (message "'Droid Sans Mono' or 'DejaVu Sans Mono' are not installed")))
     ;; Font size
     (cond (IS-MAC
-           (set-face-attribute 'default nil :height 160))
+           (set-face-attribute 'default nil :height 150))
           (t
            (set-face-attribute 'default nil :height 120)))
     ;; Default Korean font
