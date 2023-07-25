@@ -10,7 +10,7 @@
 
 ;; Default frame size
 (add-to-list 'default-frame-alist '(height . 80))
-(add-to-list 'default-frame-alist '(width . 204))
+(add-to-list 'default-frame-alist '(width . 160))
 
 (defvar +default-want-RET-continue-comments t
   "If non-nil, RET will continue commented lines.")
