@@ -93,7 +93,7 @@
     (cond (IS-MAC
            (set-face-attribute 'default nil :height 150))
           (t
-           (set-face-attribute 'default nil :height 120)))
+           (set-face-attribute 'default nil :height 130)))
     ;; Default Korean font
     (cond ((member "D2Coding" (font-family-list))
            (set-fontset-font t 'hangul (font-spec :name "D2Coding")))
