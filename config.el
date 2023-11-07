@@ -199,15 +199,15 @@
                         path-separator t))))
 
 ;; treemacs
-;; (use-package! treemacs
-;;   :bind
-;;   (:map global-map
-;;    ("M-o" . treemacs-select-window))
-;;   :config
-;;   (add-to-list 'treemacs-pre-file-insert-predicates #'treemacs-is-file-git-ignored?))
+(use-package! treemacs
+  :bind
+  (:map global-map
+   ("M-o" . treemacs-select-window))
+  :config
+  (add-to-list 'treemacs-pre-file-insert-predicates #'treemacs-is-file-git-ignored?))
 
-;; (after! (treemacs projectile)
-;;   (treemacs-project-follow-mode 1))
+(after! (treemacs projectile)
+  (treemacs-project-follow-mode 1))
 
 ;; js2-mode
 (use-package! js2-mode
