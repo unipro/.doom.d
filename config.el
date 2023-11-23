@@ -170,7 +170,8 @@
 (use-package! smartparens
   :config
   ;; like paredit keybinding
-  (map! "M-(" #'sp-wrap-round
+  (map! :map lisp-mode-map
+        "M-(" #'sp-wrap-round
         "M-s" #'sp-splice-sexp
         "C-)" #'sp-forward-slurp-sexp
         "C-}" #'sp-forward-barf-sexp
