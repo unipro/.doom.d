@@ -34,6 +34,9 @@
 ;; focus
 (package! focus)
 
+;; dotenv
+(package! dotenv-mode)
+
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)
 

@@ -262,6 +262,9 @@
 (use-package! beacon)
 (after! beacon (beacon-mode 1))
 
+;; dotenv-mode
+(add-to-list 'auto-mode-alist '("\\.env\\..*\\'" . dotenv-mode))
+
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
 ;;
