@@ -10,7 +10,7 @@
 
 ;; Default frame size
 (add-to-list 'default-frame-alist '(height . 80))
-(add-to-list 'default-frame-alist '(width . 160))
+(add-to-list 'default-frame-alist '(width . 120))
 
 (defvar +default-want-RET-continue-comments t
   "If non-nil, RET will continue commented lines.")
@@ -76,8 +76,8 @@
         :gi  [M-right]     #'forward-word))
 
 ;; Changing the leader prefixes
-(setq doom-leader-alt-key "<F13>"
-      doom-localleader-alt-key "<F14>")
+(setq doom-leader-alt-key "M-m"
+      doom-localleader-alt-key "M-m m")
 
 ;; Default fonts
 (defun my-init-fonts ()
