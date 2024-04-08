@@ -76,8 +76,8 @@
         :gi  [M-right]     #'forward-word))
 
 ;; Changing the leader prefixes
-(setq doom-leader-alt-key "M-m"
-      doom-localleader-alt-key "M-m m")
+;; (setq doom-leader-alt-key "M-m"
+;;       doom-localleader-alt-key "M-m m")
 
 ;; Default fonts
 (defun my-init-fonts ()
