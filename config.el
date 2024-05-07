@@ -32,7 +32,7 @@
   "A list of all the keymaps used for the minibuffer.")
 
 ;; OS specific fixes
-(when IS-MAC
+(when (featurep :system 'macos)
   ;; Fix MacOS shift+tab
   (define-key key-translation-map [S-iso-lefttab] [backtab])
   ;; Keybinding settings for macOS
@@ -90,9 +90,9 @@
           (t
            (message "'Droid Sans Mono' or 'DejaVu Sans Mono' are not installed")))
     ;; Font size
-    (cond (IS-MAC
+    (cond ((featurep :system 'macos)
            (set-face-attribute 'default nil :height 150))
-          (IS-WINDOWS
+          ((featurep :system 'windows)
            (set-face-attribute 'default nil :height 110))
           (t
            (set-face-attribute 'default nil :height 135)))
@@ -136,11 +136,11 @@
 (set-terminal-coding-system 'utf-8)
 (setq-default buffer-file-coding-system 'utf-8)
 (setq-default coding-system-for-write 'utf-8)
-(cond (IS-WINDOWS
+(cond ((featurep :system 'windows)
        (setq-default coding-system-for-read 'utf-8) ; XXX 'utf-16-le
        (set-clipboard-coding-system 'utf-16-le)
        (set-selection-coding-system 'utf-16-le))
-      (IS-MAC
+      ((featurep :system 'macos)
        (setq-default coding-system-for-read 'utf-8-hfs)
        (set-clipboard-coding-system 'utf-8-hfs)
        (set-selection-coding-system 'utf-8-hfs)
