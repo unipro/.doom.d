@@ -134,7 +134,7 @@
 (set-default-coding-systems 'utf-8)
 (set-keyboard-coding-system 'utf-8)
 (set-terminal-coding-system 'utf-8)
-(setq-default buffer-file-coding-system 'utf-8)
+(set-buffer-file-coding-system 'utf-8)
 (setq-default coding-system-for-write 'utf-8)
 (cond ((featurep :system 'windows)
        (setq-default coding-system-for-read 'utf-8) ; XXX 'utf-16-le
