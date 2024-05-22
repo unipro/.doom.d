@@ -37,6 +37,10 @@
 ;; dotenv
 (package! dotenv-mode)
 
+;; copilot
+(package! copilot
+  :recipe (:host github :repo "copilot-emacs/copilot.el" :files ("*.el")))
+
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)
 
