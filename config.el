@@ -79,6 +79,9 @@
 ;; (setq doom-leader-alt-key "M-m"
 ;;       doom-localleader-alt-key "M-m m")
 
+;; disable C-z
+(global-unset-key (kbd "C-z"))
+
 ;; Default fonts
 (defun my-init-fonts ()
   (when (display-graphic-p)
