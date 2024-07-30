@@ -8,9 +8,26 @@
 (setq user-full-name "Byungwan Jun"
       user-mail-address "unipro.kr@gmail.com")
 
+;; basic settings
+(setq-default window-combination-resize t ; Take new window space from all other windows
+              x-stretch-cursor t)         ; Stretch cursor to the glyph width
+(setq undo-limit 80000000                 ; Raise undo-limit to 80Mb
+      evil-want-fine-undo t               ; By default while in insert all changes are one big blob. Be more granular
+      auto-save-default t                 ; Nobody likes to loose work, I certainly don't
+      truncate-string-ellipsis "…"        ; Unicode ellispis are nicer than "...", and also save /precious/ space
+      password-cache-expiry nil           ; I can trust my computers ... can't I?
+      ;; scroll-preserve-screen-position 'always     ; Don't have `point' jump around
+      scroll-margin 2                     ; It's nice to maintain a little
+      display-time-default-load-average nil)
+(display-time-mode 1)                     ; Enable time in the mode-line
+(global-subword-mode 1)                   ; Iterate through CamelCase words
+
 ;; Default frame size
 (add-to-list 'default-frame-alist '(height . 80))
 (add-to-list 'default-frame-alist '(width . 120))
+
+;; Default buffer mode
+(setq-default major-mode 'org-mode)
 
 (defvar +default-want-RET-continue-comments t
   "If non-nil, RET will continue commented lines.")
@@ -158,6 +175,22 @@
 (setq default-input-method "korean-hangul")
 (global-set-key (kbd "S-SPC") 'toggle-input-method)
 
+;; Hippie expand
+(global-set-key [remap dabbrev-expand] #'hippie-expand)
+(setq hippie-expand-try-functions-list
+      '(try-expand-list
+        try-expand-dabbrev-visible
+        try-expand-dabbrev
+        try-expand-all-abbrevs
+        try-expand-dabbrev-all-buffers
+        try-complete-file-name-partially
+        try-complete-file-name
+        try-expand-dabbrev-from-kill
+        try-expand-whole-kill
+        try-expand-line
+        try-complete-lisp-symbol-partially
+        try-complete-lisp-symbol))
+
 ;; avy
 (setq avy-all-windows nil
       avy-all-windows-alt t
@@ -278,6 +311,14 @@
               ("TAB" . 'copilot-accept-completion)
               ("C-TAB" . 'copilot-accept-completion-by-word)
               ("C-<tab>" . 'copilot-accept-completion-by-word)))
+
+(with-eval-after-load 'lsp-mode
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]shaka-packager/packager/third_part\\'"))
+
+;; Auto-customisations
+(setq-default custom-file (expand-file-name ".custom.el" doom-user-dir))
+(when (file-exists-p custom-file)
+  (load custom-file))
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
