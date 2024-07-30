@@ -41,6 +41,12 @@
 (package! copilot
   :recipe (:host github :repo "copilot-emacs/copilot.el" :files ("*.el")))
 
+;; magit-todos
+(when (string-equal emacs-version "29.1")
+  (package! magit-todos
+    :recipe (:host github :repo "unipro/magit-todos" :branch "wip/obsolete_buffer-local-value")
+    :pin "c24518ef461393e1d4e43f15b7c3d528cb0c89bf"))
+
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)
 
