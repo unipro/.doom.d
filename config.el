@@ -8,6 +8,10 @@
 (setq user-full-name "Byungwan Jun"
       user-mail-address "unipro.kr@gmail.com")
 
+;; performance tuning
+(setq gc-cons-threshold 100000000)              ; 100mb
+(setq read-process-output-max (* 1024 1024))    ; 1mb
+
 ;; basic settings
 (setq-default window-combination-resize t ; Take new window space from all other windows
               x-stretch-cursor t)         ; Stretch cursor to the glyph width
@@ -248,6 +252,10 @@
 (after! (treemacs projectile)
   (treemacs-project-follow-mode 1))
 
+;; lsp-mode
+(after! lsp-mode
+  (setq lsp-file-watch-threshold 2000))
+
 ;; js2-mode
 (use-package! js2-mode
   :mode "\\.js\\'"
@@ -311,9 +319,6 @@
               ("TAB" . 'copilot-accept-completion)
               ("C-TAB" . 'copilot-accept-completion-by-word)
               ("C-<tab>" . 'copilot-accept-completion-by-word)))
-
-(with-eval-after-load 'lsp-mode
-  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]shaka-packager/packager/third_part\\'"))
 
 ;; Auto-customisations
 (setq-default custom-file (expand-file-name ".custom.el" doom-user-dir))
