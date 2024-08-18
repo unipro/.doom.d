@@ -38,8 +38,8 @@
 (package! dotenv-mode)
 
 ;; copilot
-(package! copilot
-  :recipe (:host github :repo "copilot-emacs/copilot.el" :files ("*.el")))
+;; (package! copilot
+;;   :recipe (:host github :repo "copilot-emacs/copilot.el" :files ("*.el")))
 
 ;; magit-todos
 (when (string-equal emacs-version "29.1")
