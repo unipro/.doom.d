@@ -121,7 +121,9 @@
        :lang
        ;;agda              ; types of types of types of types...
        ;;beancount         ; mind the GAAP
-       (cc +lsp)           ; C/C++/Obj-C madness
+       (cc               ; C/C++/Obj-C madness
+        +lsp
+        +tree-sitter)
        ;;clojure           ; java with a lisp
        common-lisp       ; if you've seen one lisp, you've seen them all
        ;;coq               ; proofs-as-programs
@@ -141,14 +143,20 @@
        ;;fsharp            ; ML stands for Microsoft's Language
        ;;fstar             ; (dependent) types and (monadic) effects and Z3
        ;;gdscript          ; the language you waited for
-       (go +lsp)         ; the hipster dialect
+       (go               ; the hipster dialect
+        +lsp
+        +tree-sitter)
        ;;(graphql +lsp)    ; Give queries a REST
        ;;(haskell +lsp)    ; a language that's lazier than I am
        ;;hy                ; readability of scheme w/ speed of python
        ;;idris             ; a language you can depend on
        json              ; At least it ain't XML
-       (java +lsp)       ; the poster child for carpal tunnel syndrome. alt (java +meghanada)
-       (javascript +lsp) ; all(hope(abandon(ye(who(enter(here))))))
+       (java             ; the poster child for carpal tunnel syndrome. alt (java +meghanada)
+        +lsp
+        +tree-sitter)
+       (javascript       ; all(hope(abandon(ye(who(enter(here))))))
+        +lsp
+        +tree-sitter)
        ;;julia             ; a better, faster MATLAB
        ;;kotlin            ; a better, slicker Java(Script)
        ;;latex             ; writing papers in Emacs has never been so fun
@@ -169,21 +177,24 @@
         ;;+pomodoro        ; be fruitful with the tomato technique
         +present         ; using org-mode for presentations
         +roam2)          ; wander around notes
-       php               ; perl's insecure younger brother
+       ;;php               ; perl's insecure younger brother
        ;;plantuml          ; diagrams for confusing people more
        ;;purescript        ; javascript, but functional
        (python           ; beautiful is better than ugly
         +lsp
         +pyright
         +pyenv
-        +poetry)
+        +poetry
+        +tree-sitter)
        ;;qt                ; the 'cutest' gui framework ever
        ;;racket            ; a DSL for DSLs
        ;;raku              ; the artist formerly known as perl6
        ;;rest              ; Emacs as a REST client
        ;;rst               ; ReST in peace
-       (ruby)            ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
-       (rust +lsp)       ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
+       ;;(ruby)            ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
+       (rust             ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
+        +lsp
+        +tree-sitter)
        ;;scala             ; java, but good
        (scheme +guile)   ; a fully conniving family of lisps
        (sh +powershell)  ; she sells {ba,z,fi}sh shells on the C xor
