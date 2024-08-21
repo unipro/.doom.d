@@ -40,8 +40,7 @@
     :pin "c24518ef461393e1d4e43f15b7c3d528cb0c89bf"))
 
 ;; copilot
-;; (package! copilot
-;;   :recipe (:host github :repo "copilot-emacs/copilot.el" :files ("*.el")))
+(package! copilot)
 
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;; (package! some-package)
