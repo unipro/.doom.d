@@ -28,7 +28,7 @@
 (global-subword-mode 1)                   ; Iterate through CamelCase words
 
 ;; Default frame size
-(add-to-list 'default-frame-alist '(height . 80))
+(add-to-list 'default-frame-alist '(height . 60))
 (add-to-list 'default-frame-alist '(width . 120))
 
 ;; Default buffer mode
@@ -118,43 +118,31 @@
 ;;
 ;;(setq doom-font (font-spec :family "Fira Code" :size 12 :weight 'semi-light)
 ;;      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 13))
-;;
+(when (display-graphic-p)
+  (cond ((member "JetBrains Mono" (font-family-list))
+         (setq doom-font (font-spec :family "JetBrains Mono" :size 15 :weight 'semi-light)))
+        ((member "Droid Sans Mono" (font-family-list))
+         (setq doom-font (font-spec :family "Droid Sans Mono" :size 15)))
+        ((member "DejaVu Sans Mono" (font-family-list))
+         (setq doom-font (font-spec :family "DejaVu Sans Mono" :size 15)))
+        (t
+         (message "'JetBrains Mono', 'Droid Sans Mono' or 'DejaVu Sans Mono' are not installed")))
+  (cond ((member "D2Coding" (font-family-list))
+         (setq doom-symbol-font (font-spec :family "D2Coding")))
+        ((member "NanumGothicCoding" (font-family-list))
+         (setq doom-symbol-font (font-spec :family "NanumGothicCoding")))
+        (t
+         (message "'D2Coding' or 'NanumGothicCoding' are not installed"))))
+
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
 ;; refresh your font settings. If Emacs still can't find your font, it likely
 ;; wasn't installed correctly. Font issues are rarely Doom issues!
 
-;; Default fonts
-(defun my-init-fonts ()
-  (when (display-graphic-p)
-    ;; Default Latin font
-    (cond ((member "Droid Sans Mono" (font-family-list))
-           (set-face-attribute 'default nil :family "Droid Sans Mono"))
-          ((member "DejaVu Sans Mono" (font-family-list))
-           (set-face-attribute 'default nil :family "DejaVu Sans Mono"))
-          (t
-           (message "'Droid Sans Mono' or 'DejaVu Sans Mono' are not installed")))
-    ;; Font size
-    (cond ((featurep :system 'macos)
-           (set-face-attribute 'default nil :height 150))
-          ((featurep :system 'windows)
-           (set-face-attribute 'default nil :height 110))
-          (t
-           (set-face-attribute 'default nil :height 135)))
-    ;; Default Korean font
-    (cond ((member "D2Coding" (font-family-list))
-           (set-fontset-font t 'hangul (font-spec :name "D2Coding")))
-          ((member "NanumGothicCoding" (font-family-list))
-           (set-fontset-font t 'hangul (font-spec :name "NanumGothicCoding")))
-          (t
-           (message "'D2Coding' or 'NanumGothicCoding' are not installed")))))
-(add-hook 'after-setting-font-hook #'my-init-fonts)
-
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 (if (display-graphic-p)
-    ;; (setq doom-theme 'doom-one)
     (setq doom-theme 'doom-solarized-light)
   (setq doom-theme nil))
 
@@ -164,13 +152,13 @@
 (when (>= emacs-major-version 28)
   (setq isearch-allow-motion t))
 
-;; If you use `org' and don't want your org files in the default location below,
-;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
-
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type nil)
+
+;; If you use `org' and don't want your org files in the default location below,
+;; change `org-directory'. It must be set before org loads!
+(setq org-directory "~/org/")
 
 ;; coding-system
 (require 'ucs-normalize)
@@ -273,31 +261,6 @@
 (after! (treemacs projectile)
   (treemacs-project-follow-mode 1))
 
-;; js2-mode
-(use-package! js2-mode
-  :mode "\\.js\\'"
-  :config
-  (setq js-chain-indent t
-        js2-basic-offset 4
-        ;; Don't mishighlight shebang lines
-        js2-skip-preprocessor-directives t
-        ;; let flycheck handle this
-        js2-mode-show-parse-errors nil
-        js2-mode-show-strict-warnings nil
-        ;; Flycheck provides these features, so disable them: conflicting with
-        ;; the eslint settings.
-        js2-strict-missing-semi-warning nil
-        ;; maximum fontification
-        js2-highlight-level 3
-        js2-idle-timer-delay 0.15))
-
-(use-package! xref-js2
-  :when (modulep! :tools lookup)
-  :init
-  (setq xref-js2-search-program 'rg)
-  (set-lookup-handlers! 'rjsx-mode
-    :xref-backend #'xref-js2-xref-backend))
-
 ;; python
 (after! python
   (setq python-shell-interpreter "python3"
@@ -312,21 +275,23 @@
                                     :test-prefix "test_"
                                     :test-suffix "_test"))
 
-;; realgud-lldb
-;; (use-package! realgud-lldb)
-
 ;; unset the backends for a sh mode
 (after! sh-script
   (set-company-backend! 'sh-mode nil))
-
-(use-package! focus)
 
 ;; global beacon minor-mode
 (use-package! beacon)
 (after! beacon (beacon-mode 1))
 
+(use-package! focus)
+
 ;; dotenv-mode
 (add-to-list 'auto-mode-alist '("\\.env\\..*\\'" . dotenv-mode))
+
+;; auto-customisations
+(setq-default custom-file (expand-file-name ".custom.el" doom-user-dir))
+(when (file-exists-p custom-file)
+  (load custom-file))
 
 ;; accept completion from copilot and fallback to company
 (use-package! copilot
@@ -342,21 +307,7 @@
   (add-to-list 'copilot-indentation-alist '(prog-mode . 4))
   (add-to-list 'copilot-indentation-alist '(org-mode . 2))
   (add-to-list 'copilot-indentation-alist '(text-mode . 2))
-  (add-to-list 'copilot-indentation-alist '(closure-mode . 2))
-  (add-to-list 'copilot-indentation-alist '(emacs-lisp-mode . 2)))
-
-;; This determines the style of line numbers in effect. If set to `nil', line
-;; numbers are disabled. For relative line numbers, set this to `relative'.
-;; (setq display-line-numbers-type t)
-
-;; If you use `org' and don't want your org files in the default location below,
-;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
-
-;; auto-customisations
-(setq-default custom-file (expand-file-name ".custom.el" doom-user-dir))
-(when (file-exists-p custom-file)
-  (load custom-file))
+  (add-to-list 'copilot-indentation-alist '(closure-mode . 2)))
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.

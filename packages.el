@@ -8,9 +8,6 @@
 ;; avy
 (package! avy)
 
-;; realgud-lldb
-;; (package! realgud-lldb)
-
 ;; paredit
 ;; (when (package! paredit)
 ;;   (package! paredit-everywhere))
