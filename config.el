@@ -120,11 +120,11 @@
 ;;      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 13))
 (when (display-graphic-p)
   (cond ((member "JetBrains Mono" (font-family-list))
-         (setq doom-font (font-spec :family "JetBrains Mono" :size 15 :weight 'semi-light)))
+         (setq doom-font (font-spec :family "JetBrains Mono")))
         ((member "Droid Sans Mono" (font-family-list))
-         (setq doom-font (font-spec :family "Droid Sans Mono" :size 15)))
+         (setq doom-font (font-spec :family "Droid Sans Mono")))
         ((member "DejaVu Sans Mono" (font-family-list))
-         (setq doom-font (font-spec :family "DejaVu Sans Mono" :size 15)))
+         (setq doom-font (font-spec :family "DejaVu Sans Mono")))
         (t
          (message "'JetBrains Mono', 'Droid Sans Mono' or 'DejaVu Sans Mono' are not installed")))
   (cond ((member "D2Coding" (font-family-list))
@@ -132,7 +132,14 @@
         ((member "NanumGothicCoding" (font-family-list))
          (setq doom-symbol-font (font-spec :family "NanumGothicCoding")))
         (t
-         (message "'D2Coding' or 'NanumGothicCoding' are not installed"))))
+         (message "'D2Coding' or 'NanumGothicCoding' are not installed")))
+  ;; font size
+  (cond ((featurep :system 'macos)
+         (set-face-attribute 'default nil :height 150 :weight 'semi-light))
+        ((featurep :system 'windows)
+         (set-face-attribute 'default nil :height 130 :weight 'semi-light))
+        (t
+         (set-face-attribute 'default nil :height 140 :weight 'semi-light))))
 
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
