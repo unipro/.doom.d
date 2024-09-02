@@ -288,10 +288,10 @@
 ;; dotenv-mode
 (add-to-list 'auto-mode-alist '("\\.env\\..*\\'" . dotenv-mode))
 
-;; auto-customisations
-(setq-default custom-file (expand-file-name ".custom.el" doom-user-dir))
-(when (file-exists-p custom-file)
-  (load custom-file))
+;; fix the error caused by proselint craching on macOS
+(when (featurep :system 'macos)
+  (after! flycheck
+    (setq-default flycheck-disabled-checkers '(proselint))))
 
 ;; accept completion from copilot and fallback to company
 (use-package! copilot
@@ -308,6 +308,11 @@
   (add-to-list 'copilot-indentation-alist '(org-mode . 2))
   (add-to-list 'copilot-indentation-alist '(text-mode . 2))
   (add-to-list 'copilot-indentation-alist '(closure-mode . 2)))
+
+;; auto-customisations
+(setq-default custom-file (expand-file-name ".custom.el" doom-user-dir))
+(when (file-exists-p custom-file)
+  (load custom-file))
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
