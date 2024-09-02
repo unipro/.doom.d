@@ -135,7 +135,7 @@
          (message "'D2Coding' or 'NanumGothicCoding' are not installed")))
   ;; font size
   (cond ((featurep :system 'macos)
-         (set-face-attribute 'default nil :height 140 :weight 'semi-light))
+         (set-face-attribute 'default nil :height 150 :weight 'semi-light))
         ((featurep :system 'windows)
          (set-face-attribute 'default nil :height 120 :weight 'semi-light))
         (t
