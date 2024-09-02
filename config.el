@@ -314,6 +314,8 @@
   (add-to-list 'copilot-indentation-alist '(prog-mode . 4))
   (add-to-list 'copilot-indentation-alist '(org-mode . 2))
   (add-to-list 'copilot-indentation-alist '(text-mode . 2))
+  (add-to-list 'copilot-indentation-alist '(emacs-lisp-mode . 2))
+  (add-to-list 'copilot-indentation-alist '(lisp-mode . 2))
   (add-to-list 'copilot-indentation-alist '(closure-mode . 2)))
 
 ;; auto-customisations
