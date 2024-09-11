@@ -32,7 +32,7 @@
 (add-to-list 'default-frame-alist '(width . 120))
 
 ;; Default buffer mode
-(setq-default major-mode 'org-mode)
+;; (setq-default major-mode 'org-mode)
 
 (defvar +default-want-RET-continue-comments t
   "If non-nil, RET will continue commented lines.")
