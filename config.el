@@ -28,8 +28,12 @@
 (global-subword-mode 1)                   ; Iterate through CamelCase words
 
 ;; Default frame size
-(add-to-list 'default-frame-alist '(height . 60))
-(add-to-list 'default-frame-alist '(width . 120))
+(when window-system
+  (add-to-list 'initial-frame-alist '(height . 60))
+  (add-to-list 'initial-frame-alist '(width . 160))
+
+  (add-to-list 'default-frame-alist '(height . 60))
+  (add-to-list 'default-frame-alist '(width . 160)))
 
 ;; Default buffer mode
 ;; (setq-default major-mode 'org-mode)
