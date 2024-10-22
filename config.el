@@ -225,16 +225,17 @@
 (global-set-key (kbd "M-g w") 'avy-goto-word-1)
 
 ;; smartparens
-(use-package! smartparens
-  :config
-  ;; like paredit keybinding
-  (map! :map lisp-mode-map
-        "M-(" #'sp-wrap-round
-        "M-s" #'sp-splice-sexp
-        "C-)" #'sp-forward-slurp-sexp
-        "C-}" #'sp-forward-barf-sexp
-        "C-(" #'sp-backward-slurp-sexp
-        "C-{" #'sp-backward-barf-sexp))
+(use-package! smartparens)
+
+;; like paredit keybinding
+(map! :after smartparens
+      :map smartparens-mode-map
+      "M-(" #'sp-wrap-round
+      "M-s" #'sp-splice-sexp
+      "C-)" #'sp-forward-slurp-sexp
+      "C-}" #'sp-forward-barf-sexp
+      "C-(" #'sp-backward-slurp-sexp
+      "C-{" #'sp-backward-barf-sexp)
 
 ;; ;; paredit
 ;; (use-package! paredit
