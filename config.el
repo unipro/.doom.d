@@ -143,7 +143,7 @@
         ((featurep :system 'windows)
          (set-face-attribute 'default nil :height 120 :weight 'semi-light))
         (t
-         (set-face-attribute 'default nil :height 140 :weight 'semi-light))))
+         (set-face-attribute 'default nil :height 130 :weight 'semi-light))))
 
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
