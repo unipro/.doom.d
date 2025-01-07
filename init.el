@@ -101,8 +101,7 @@
         +dictionary      ; dictionary/thesaurus is nice
         +docsets)        ; ...or in Dash docsets locally
        lsp               ; M-x vscode
-       (magit            ; a git porcelain for Emacs
-        +forge)          ; interface with git forges
+       magit             ; a git porcelain for Emacs
        make              ; run make tasks from Emacs
        ;;pass              ; password manager for nerds
        pdf               ; pdf enhancements
