@@ -292,6 +292,9 @@
 (after! sh-script
   (set-company-backend! 'sh-mode nil))
 
+;; realgud-lldb
+(use-package! realgud-lldb)
+
 ;; global beacon minor-mode
 (use-package! beacon)
 (after! beacon (beacon-mode 1))

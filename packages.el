@@ -12,6 +12,9 @@
 ;; (when (package! paredit)
 ;;   (package! paredit-everywhere))
 
+;; realgud-lldb
+(package! realgud-lldb)
+
 ;; nginx-mode
 (package! nginx-mode)
 
