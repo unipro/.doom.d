@@ -326,6 +326,13 @@
   (add-to-list 'copilot-indentation-alist '(emacs-lisp-mode . 2))
   (add-to-list 'copilot-indentation-alist '(lisp-mode . 2))
   (add-to-list 'copilot-indentation-alist '(closure-mode . 2)))
+(use-package! copilot-chat
+  :bind (:map copilot-chat-mode-map
+              ("C-c C-y" . copilot-chat-yank)
+              ("C-c M-y" . copilot-chat-yank-pop)
+              ("C-c C-M-y" . (lambda () (interactive) (copilot-chat-yank-pop -1))))
+  :config
+  (add-hook 'git-commit-setup-hook 'copilot-chat-insert-commit-message))
 
 ;; auto-customisations
 (setq-default custom-file (expand-file-name ".custom.el" doom-user-dir))
