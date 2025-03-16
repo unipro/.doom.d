@@ -45,6 +45,11 @@
 (package! copilot-chat
   :recipe (:host github :repo "chep/copilot-chat.el"))
 
+;; claude
+(package! claude-code
+  :recipe (:host github :repo "stevemolitor/claude-code.el" :branch "main"
+                 :files ("*.el" (:exclude "demo.gif"))))
+
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;; (package! some-package)
 

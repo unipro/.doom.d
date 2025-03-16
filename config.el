@@ -334,6 +334,14 @@
   :config
   (add-hook 'git-commit-setup-hook 'copilot-chat-insert-commit-message))
 
+;; claude
+(use-package! claude-code
+  :bind (:map claude-code-map
+              ("C-c c" . claude-code-command-map))
+  :hook (claude-code--start . sm-setup-claude-faces)
+  :config
+  (claude-code-mode))
+
 ;; auto-customisations
 (setq-default custom-file (expand-file-name ".custom.el" doom-user-dir))
 (when (file-exists-p custom-file)
