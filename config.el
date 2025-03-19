@@ -326,6 +326,7 @@
   (add-to-list 'copilot-indentation-alist '(emacs-lisp-mode . 2))
   (add-to-list 'copilot-indentation-alist '(lisp-mode . 2))
   (add-to-list 'copilot-indentation-alist '(closure-mode . 2)))
+
 (use-package! copilot-chat
   :bind (:map copilot-chat-mode-map
               ("C-c C-y" . copilot-chat-yank)
@@ -334,13 +335,14 @@
   :config
   (add-hook 'git-commit-setup-hook 'copilot-chat-insert-commit-message))
 
-;; claude
-(if (>= emacs-major-version 30)
-    (use-package! claude-code
-      :bind (:map claude-code-map
-                  ("C-c c" . claude-code-command-map))
-      :hook (claude-code--start . sm-setup-claude-faces)
-      :config (claude-code-mode)))
+;; claude-code
+;; (if (>= emacs-major-version 30)
+;;     (use-package! claude-code
+;;       :hook (prog-mode . claude-code)
+;;       :bind (:map prog-mode-map
+;;                   ("C-c c" . claude-code-command-map))
+;;       :hook (claude-code--start . sm-setup-claude-faces)
+;;       :config (claude-code-mode)))
 
 ;; auto-customisations
 (setq-default custom-file (expand-file-name ".custom.el" doom-user-dir))
