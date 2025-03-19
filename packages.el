@@ -43,7 +43,7 @@
 (package! copilot
   :recipe (:host github :repo "copilot-emacs/copilot.el"))
 (package! copilot-chat
-  :recipe (:host github :repo "chep/copilot-chat.el"))
+  :recipe (:host github :repo "chep/copilot-chat.el" :files ("*.el")))
 
 ;; claude-code
 ;; (if (>= emacs-major-version 30)
