@@ -309,6 +309,7 @@
   (after! flycheck
     (setq-default flycheck-disabled-checkers '(proselint))))
 
+;; copilot
 ;; accept completion from copilot and fallback to company
 (use-package! copilot
   :hook (prog-mode . copilot-mode)
@@ -327,13 +328,19 @@
   (add-to-list 'copilot-indentation-alist '(lisp-mode . 2))
   (add-to-list 'copilot-indentation-alist '(closure-mode . 2)))
 
+;; copilot-chat
 (use-package! copilot-chat
-  :bind (:map copilot-chat-mode-map
+  :bind (:map global-map
               ("C-c C-y" . copilot-chat-yank)
               ("C-c M-y" . copilot-chat-yank-pop)
               ("C-c C-M-y" . (lambda () (interactive) (copilot-chat-yank-pop -1))))
-  :config
+  :init
   (add-hook 'git-commit-setup-hook 'copilot-chat-insert-commit-message))
+
+;; gpt-commit
+;; (use-package! gpt-commit
+;;   :init
+;;   (add-hook 'git-commit-setup-hook 'gpt-commit-message))
 
 ;; claude-code
 ;; (if (>= emacs-major-version 30)
@@ -345,9 +352,14 @@
 ;;       :config (claude-code-mode)))
 
 ;; auto-customisations
-(setq-default custom-file (expand-file-name ".custom.el" doom-user-dir))
+(setq-default custom-file (expand-file-name "custom.el" doom-user-dir))
 (when (file-exists-p custom-file)
   (load custom-file))
+
+;; local-customisations
+(setq-default local-file (expand-file-name "local.el" doom-user-dir))
+(when (file-exists-p local-file)
+  (load local-file))
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.

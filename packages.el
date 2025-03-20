@@ -45,6 +45,10 @@
 (package! copilot-chat
   :recipe (:host github :repo "chep/copilot-chat.el" :files ("*.el")))
 
+;; gpt-commit
+;; (package! gpt-commit
+;;   :recipe (:host github :repo "ywkim/gpt-commit" :files ("*.el")))
+
 ;; claude-code
 ;; (if (>= emacs-major-version 30)
 ;;     (package! claude-code
