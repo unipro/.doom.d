@@ -337,20 +337,6 @@
   :init
   (add-hook 'git-commit-setup-hook 'copilot-chat-insert-commit-message))
 
-;; gpt-commit
-;; (use-package! gpt-commit
-;;   :init
-;;   (add-hook 'git-commit-setup-hook 'gpt-commit-message))
-
-;; claude-code
-;; (if (>= emacs-major-version 30)
-;;     (use-package! claude-code
-;;       :hook (prog-mode . claude-code)
-;;       :bind (:map prog-mode-map
-;;                   ("C-c c" . claude-code-command-map))
-;;       :hook (claude-code--start . sm-setup-claude-faces)
-;;       :config (claude-code-mode)))
-
 ;; auto-customisations
 (setq-default custom-file (expand-file-name "custom.el" doom-user-dir))
 (when (file-exists-p custom-file)
