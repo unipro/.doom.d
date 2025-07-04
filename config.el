@@ -278,6 +278,10 @@
 (after! (treemacs projectile)
   (treemacs-project-follow-mode 1))
 
+;; lisp
+(add-hook! '(emacs-lisp-mode-hook lisp-mode-hook common-lisp-mode-hook)
+  (setq-local lisp-indent-offset 2))
+
 ;; python
 (after! python
   (setq python-shell-interpreter "python3"
@@ -323,14 +327,7 @@
               ("C-TAB" . 'copilot-accept-completion-by-word)
               ("C-<tab>" . 'copilot-accept-completion-by-word)
               ("C-n" . 'copilot-next-completion)
-              ("C-p" . 'copilot-previous-completion))
-  :config
-  (add-to-list 'copilot-indentation-alist '(prog-mode . 4))
-  (add-to-list 'copilot-indentation-alist '(org-mode . 2))
-  (add-to-list 'copilot-indentation-alist '(text-mode . 2))
-  (add-to-list 'copilot-indentation-alist '(emacs-lisp-mode . 2))
-  (add-to-list 'copilot-indentation-alist '(lisp-mode . 2))
-  (add-to-list 'copilot-indentation-alist '(closure-mode . 2)))
+              ("C-p" . 'copilot-previous-completion)))
 
 ;; copilot-chat
 (use-package! copilot-chat
