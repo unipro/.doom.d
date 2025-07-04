@@ -320,7 +320,7 @@
 ;; gptel
 (use-package! gptel
   :config
-  (setq gptel-api-key (getenv OPENAI_API_KEY)))
+  (setq gptel-api-key (getenv "OPENAI_API_KEY")))
 
 ;; copilot
 ;; accept completion from copilot and fallback to company
