@@ -102,7 +102,7 @@
        (lookup           ; navigate your code and its documentation
         +dictionary      ; dictionary/thesaurus is nice
         +docsets)        ; ...or in Dash docsets locally
-       ;;llm               ; when I said you needed friends, I didn't mean...
+       llm               ; when I said you needed friends, I didn't mean...
        lsp               ; M-x vscode
        magit             ; a git porcelain for Emacs
        make              ; run make tasks from Emacs

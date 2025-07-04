@@ -317,6 +317,11 @@
   (after! flycheck
     (setq-default flycheck-disabled-checkers '(proselint))))
 
+;; gptel
+(use-package! gptel
+  :config
+  (setq gptel-api-key (getenv OPENAI_API_KEY)))
+
 ;; copilot
 ;; accept completion from copilot and fallback to company
 (use-package! copilot
