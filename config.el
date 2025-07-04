@@ -27,6 +27,10 @@
 (display-time-mode 1)                     ; Enable time in the mode-line
 (global-subword-mode 1)                   ; Iterate through CamelCase words
 
+;; *scratch* buffer
+(setq initial-major-mode 'lisp-interaction-mode) ; Set the initial major mode
+(setq initial-scratch-message ";; This buffer is for text that is not saved, and for Lisp evaluation.\n\n")
+
 ;; Default frame size
 (when window-system
   (add-to-list 'initial-frame-alist '(height . 60))
