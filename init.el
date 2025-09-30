@@ -121,7 +121,8 @@
        ;;agda              ; types of types of types of types...
        ;;beancount         ; mind the GAAP
        (cc               ; C/C++/Obj-C madness
-        +lsp)
+        +lsp
+        +tree-sitter)
        ;;clojure           ; java with a lisp
        common-lisp       ; if you've seen one lisp, you've seen them all
        ;;coq               ; proofs-as-programs

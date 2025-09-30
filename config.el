@@ -278,6 +278,33 @@
 (after! (treemacs projectile)
   (treemacs-project-follow-mode 1))
 
+(when (and (>= emacs-major-version 29)
+        (fboundp 'treesit-available-p)
+        (treesit-available-p))
+  ;; Automatically remap major modes to Tree-sitter versions
+  (setq major-mode-remap-alist
+    '((c-mode          . c-ts-mode)
+      (c++-mode        . c++-ts-mode)
+      (python-mode     . python-ts-mode)
+      (rust-mode       . rust-ts-mode)
+      (go-mode         . go-ts-mode)
+      (java-mode       . java-ts-mode)
+      (js-mode         . js-ts-mode)
+      (javascript-mode . js-ts-mode)))
+
+  ;; Global indentation settings
+  (setq-default indent-tabs-mode nil)  ;; Always use spaces, not tabs
+  (setq-default tab-width 4)           ;; Tab width is 4 spaces
+
+  ;; Language-specific Tree-sitter indent settings
+  (setq-default c-ts-mode-indent-offset 4)
+  (setq-default c++-ts-mode-indent-offset 4)
+  (setq-default python-ts-mode-indent-offset 4)
+  (setq-default rust-ts-mode-indent-offset 4)
+  (setq-default go-ts-mode-indent-offset 4)
+  (setq-default java-ts-mode-indent-offset 4)
+  (setq-default js-ts-mode-indent-offset 4))
+
 ;; lisp
 (add-hook! '(emacs-lisp-mode-hook lisp-mode-hook common-lisp-mode-hook)
   (setq-local lisp-indent-offset 2))
