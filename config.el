@@ -349,26 +349,27 @@
   :config
   (setq gptel-api-key (getenv "OPENAI_API_KEY")))
 
-;; copilot
-;; accept completion from copilot and fallback to company
-(use-package! copilot
-  :hook (prog-mode . copilot-mode)
-  :bind (:map copilot-completion-map
-              ("<tab>" . 'copilot-accept-completion)
-              ("TAB" . 'copilot-accept-completion)
-              ("C-TAB" . 'copilot-accept-completion-by-word)
-              ("C-<tab>" . 'copilot-accept-completion-by-word)
-              ("C-n" . 'copilot-next-completion)
-              ("C-p" . 'copilot-previous-completion)))
+(when (not (featurep :system 'windows))
+  ;; copilot
+  ;; accept completion from copilot and fallback to company
+  (use-package! copilot
+    :hook (prog-mode . copilot-mode)
+    :bind (:map copilot-completion-map
+            ("<tab>" . 'copilot-accept-completion)
+            ("TAB" . 'copilot-accept-completion)
+            ("C-TAB" . 'copilot-accept-completion-by-word)
+            ("C-<tab>" . 'copilot-accept-completion-by-word)
+            ("C-n" . 'copilot-next-completion)
+            ("C-p" . 'copilot-previous-completion)))
 
-;; copilot-chat
-(use-package! copilot-chat
-  :bind (:map global-map
-              ("C-c C-y" . copilot-chat-yank)
-              ("C-c M-y" . copilot-chat-yank-pop)
-              ("C-c C-M-y" . (lambda () (interactive) (copilot-chat-yank-pop -1))))
-  :init
-  (add-hook 'git-commit-setup-hook 'copilot-chat-insert-commit-message))
+  ;; copilot-chat
+  (use-package! copilot-chat
+    :bind (:map global-map
+            ("C-c C-y" . copilot-chat-yank)
+            ("C-c M-y" . copilot-chat-yank-pop)
+            ("C-c C-M-y" . (lambda () (interactive) (copilot-chat-yank-pop -1))))
+    :init
+    (add-hook 'git-commit-setup-hook 'copilot-chat-insert-commit-message)))
 
 ;; auto-customisations
 (setq-default custom-file (expand-file-name "custom.el" doom-user-dir))
