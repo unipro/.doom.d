@@ -330,6 +330,11 @@
 ;; realgud-lldb
 (use-package! realgud-lldb)
 
+;; eglot
+(after! eglot
+  (setq-default eglot-inlay-hints-mode nil)
+  (add-hook 'eglot-managed-mode-hook (lambda () (eglot-inlay-hints-mode -1))))
+
 ;; global beacon minor-mode
 (use-package! beacon)
 (after! beacon (beacon-mode 1))
