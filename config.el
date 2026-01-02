@@ -352,7 +352,12 @@
 ;; gptel
 (use-package! gptel
   :config
-  (setq gptel-api-key (getenv "OPENAI_API_KEY")))
+  ;; Copilot
+  (condition-case err
+      (gptel-make-gh-copilot "Copilot")
+    (error
+     (message "[gptel] Copilot backend disabled (%s)"
+              (error-message-string err)))))
 
 (when (not (featurep :system 'windows))
   ;; copilot
