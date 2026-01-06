@@ -39,6 +39,10 @@
     :recipe (:host github :repo "unipro/magit-todos" :branch "wip/obsolete_buffer-local-value")
     :pin "c24518ef461393e1d4e43f15b7c3d528cb0c89bf"))
 
+;; claude-code
+(package! claude-code-ide
+  :recipe (:host github :repo "manzaltu/claude-code-ide.el"))
+
 ;; copilot
 (package! copilot
   :recipe (:host github :repo "copilot-emacs/copilot.el" :files ("*.el" "dist")))
