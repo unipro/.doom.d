@@ -358,12 +358,7 @@
          ("C-c ' q" . claude-code-ide-quit)              ; Quit Claude Code
          ("C-c ' r" . claude-code-ide-toggle-recent))    ; Toggle recent session
   :config
-  (claude-code-ide-emacs-tools-setup)
-
-  ;; configure ace-window interactions
-  (after! ace-window
-    ;; temporary workaround to ignore claude-code-ide buffers in ace-window
-    (add-to-list 'aw-ignored-buffers 'vterm-mode)))
+  (claude-code-ide-emacs-tools-setup))
 
 ;; gptel
 (use-package! gptel
