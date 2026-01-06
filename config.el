@@ -351,9 +351,19 @@
 
 ;; claude-code
 (use-package! claude-code-ide
-  :bind ("C-c C-'" . claude-code-ide-menu) ; Set your favorite keybinding
+  :bind (("C-c C-'" . claude-code-ide-menu)              ; Main menu
+         ("C-c ' m" . claude-code-ide-menu)              ; Main menu
+         ("C-c ' s" . claude-code-ide)                   ; Start new Claude Code session
+         ("C-c ' b" . claude-code-ide-switch-to-buffer)  ; Switch to project’s Claude buffer
+         ("C-c ' q" . claude-code-ide-quit)              ; Quit Claude Code
+         ("C-c ' r" . claude-code-ide-toggle-recent))    ; Toggle recent session
   :config
-  (claude-code-ide-emacs-tools-setup)) ; Optionally enable Emacs MCP tools
+  (claude-code-ide-emacs-tools-setup)
+
+  ;; configure ace-window interactions
+  (after! ace-window
+    ;; temporary workaround to ignore claude-code-ide buffers in ace-window
+    (add-to-list 'aw-ignored-buffers 'vterm-mode)))
 
 ;; gptel
 (use-package! gptel
