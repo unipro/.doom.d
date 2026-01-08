@@ -351,6 +351,7 @@
 
 ;; claude-code
 (use-package! claude-code-ide
+  :commands (claude-code-ide claude-code-ide-menu)
   :bind (("C-c C-'" . claude-code-ide-menu)              ; Main menu
          ("C-c ' m" . claude-code-ide-menu)              ; Main menu
          ("C-c ' s" . claude-code-ide)                   ; Start new Claude Code session
@@ -358,7 +359,34 @@
          ("C-c ' q" . claude-code-ide-quit)              ; Quit Claude Code
          ("C-c ' r" . claude-code-ide-toggle-recent))    ; Toggle recent session
   :config
-  (claude-code-ide-emacs-tools-setup))
+  (claude-code-ide-emacs-tools-setup)
+
+  ;; notification settings
+  (setq claude-code-notification-function
+    (cond
+      ((featurep :system 'macos)
+        (lambda (title message)
+          (call-process "osascript" nil nil nil
+            "-e" (format "display notification \"%s\" with title \"%s\" sound name \"Glass\""
+                   message title))))
+      ((featurep :system 'windows)
+        (lambda (title message)
+          (call-process "powershell" nil nil nil
+            "-NoProfile" "-Command"
+            (concat "[Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime] | Out-Null; "
+              "$template = '<toast><visual><binding template=\"ToastGeneric\"><text>" title "</text><text>" message "</text></binding></visual></toast>'; "
+              "$xml = New-Object Windows.Data.Xml.Dom.XmlDocument; "
+              "$xml.LoadXml($template); "
+              "$toast = [Windows.UI.Notifications.ToastNotification]::new($xml); "
+              "[Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier('Emacs').Show($toast)"))))
+      ((featurep :system 'linux)
+        (if (executable-find "notify-send")
+          (lambda (title message)
+            (call-process "notify-send" nil nil nil title message))
+          (lambda (title message)
+            (message "[%s] %s" title message))))
+      (t (lambda (title message)
+           (message "[%s] %s" title message))))))
 
 ;; gptel
 (use-package! gptel

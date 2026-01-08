@@ -39,6 +39,9 @@
     :recipe (:host github :repo "unipro/magit-todos" :branch "wip/obsolete_buffer-local-value")
     :pin "c24518ef461393e1d4e43f15b7c3d528cb0c89bf"))
 
+;; web-server
+(package! web-server)
+
 ;; claude-code
 (package! claude-code-ide
   :recipe (:host github :repo "manzaltu/claude-code-ide.el"))
