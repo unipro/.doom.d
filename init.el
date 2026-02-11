@@ -35,7 +35,6 @@
        ;;doom-quit         ; DOOM quit-message prompts when you quit Emacs
        (emoji +unicode)  ; 🙂
        hl-todo           ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
-       ;;hydra
        indent-guides     ; highlighted indent columns
        ;;(ligatures +extra); ligatures and symbols to make your code pretty again
        ;;minimap           ; show a map of the code on the side
@@ -120,6 +119,7 @@
        ;;tty               ; improve the terminal Emacs experience
 
        :lang
+       ;;ada               ; In strong typing we (blindly) trust
        ;;agda              ; types of types of types of types...
        ;;beancount         ; mind the GAAP
        (cc               ; C/C++/Obj-C madness
@@ -180,6 +180,7 @@
         +roam2)          ; wander around notes
        ;;php               ; perl's insecure younger brother
        ;;plantuml          ; diagrams for confusing people more
+       ;;graphviz          ; diagrams for confusing yourself even more
        ;;purescript        ; javascript, but functional
        (python           ; beautiful is better than ugly
         +lsp
@@ -192,7 +193,7 @@
        ;;raku              ; the artist formerly known as perl6
        ;;rest              ; Emacs as a REST client
        ;;rst               ; ReST in peace
-       ;;(ruby)            ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
+       ;;(ruby +rails)     ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
        (rust             ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
         +lsp
         +tree-sitter)
