@@ -352,12 +352,19 @@
 ;; claude-code
 (use-package! claude-code-ide
   :commands (claude-code-ide claude-code-ide-menu)
-  :bind (("C-c C-'" . claude-code-ide-menu)              ; Main menu
-         ("C-c ' m" . claude-code-ide-menu)              ; Main menu
-         ("C-c ' s" . claude-code-ide)                   ; Start new Claude Code session
-         ("C-c ' b" . claude-code-ide-switch-to-buffer)  ; Switch to project’s Claude buffer
-         ("C-c ' q" . claude-code-ide-quit)              ; Quit Claude Code
-         ("C-c ' r" . claude-code-ide-toggle-recent))    ; Toggle recent session
+  :bind (("C-c C-'" . claude-code-ide-menu)                ; Main menu
+         ("C-c ' m" . claude-code-ide-menu)                ; Main menu
+         ;; Session Management
+         ("C-c ' s" . claude-code-ide)                     ; Start new Claude Code session
+         ("C-c ' q" . claude-code-ide-quit)                ; Quit Claude Code
+         ;; Navigation
+         ("C-c ' b" . claude-code-ide-switch-to-buffer)    ; Switch to project’s Claude buffer
+         ("C-c ' r" . claude-code-ide-toggle-recent)       ; Toggle recent session
+         ;; Interaction
+         ("C-c ' i" . claude-code-ide-insert-at-mentioned) ; Insert selection
+         ("C-c ' p" . claude-code-ide-send-prompt)         ; Send prompt from minibuffer
+         ("C-c ' e" . claude-code-ide-send-escape)         ; Send escape key
+         ("C-c ' n" . claude-code-ide-insert-newline))     ; Insert newline
   :config
   (claude-code-ide-emacs-tools-setup)
 
