@@ -8,27 +8,11 @@
 ;; avy
 (package! avy)
 
-;; paredit
-;; (when (package! paredit)
-;;   (package! paredit-everywhere))
-
 ;; realgud-lldb
 (package! realgud-lldb)
 
 ;; nginx-mode
 (package! nginx-mode)
-
-;; javascript
-(disable-packages! rjsx-mode)
-
-;; shellscript
-(disable-packages! company-shell)
-
-;; highlights the current cursor line after major movements
-(package! beacon)
-
-;; focus
-(package! focus)
 
 ;; dotenv
 (package! dotenv-mode)
@@ -47,8 +31,8 @@
   :recipe (:host github :repo "manzaltu/claude-code-ide.el"))
 
 ;; copilot
-(package! copilot
-  :recipe (:host github :repo "copilot-emacs/copilot.el" :files ("*.el" "dist")))
+;; (package! copilot
+;;   :recipe (:host github :repo "copilot-emacs/copilot.el" :files ("*.el" "dist")))
 (package! copilot-chat
   :recipe (:host github :repo "chep/copilot-chat.el" :files ("*.el")))
 

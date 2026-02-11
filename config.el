@@ -245,17 +245,6 @@
       "C-(" #'sp-backward-slurp-sexp
       "C-{" #'sp-backward-barf-sexp)
 
-;; ;; paredit
-;; (use-package! paredit
-;;   :init
-;;   (use-package! paredit-everywhere))
-
-;; (add-hook! lisp-mode (paredit-mode t))
-;; (add-hook! lisp-interaction-mode (paredit-mode t))
-
-;; (add-hook! emacs-lisp-mode (paredit-mode t))
-;; (add-hook! ielm-mode (paredit-mode t))
-
 ;; man
 (after! woman
   ;; The woman-manpath default value does not necessarily match man. If we have
@@ -335,12 +324,6 @@
   (setq-default eglot-inlay-hints-mode nil)
   (add-hook 'eglot-managed-mode-hook (lambda () (eglot-inlay-hints-mode -1))))
 
-;; global beacon minor-mode
-(use-package! beacon)
-(after! beacon (beacon-mode 1))
-
-(use-package! focus)
-
 ;; dotenv-mode
 (add-to-list 'auto-mode-alist '("\\.env\\..*\\'" . dotenv-mode))
 
@@ -408,15 +391,15 @@
 (when (not (featurep :system 'windows))
   ;; copilot
   ;; accept completion from copilot and fallback to company
-  (use-package! copilot
-    :hook (prog-mode . copilot-mode)
-    :bind (:map copilot-completion-map
-            ("<tab>" . 'copilot-accept-completion)
-            ("TAB" . 'copilot-accept-completion)
-            ("C-TAB" . 'copilot-accept-completion-by-word)
-            ("C-<tab>" . 'copilot-accept-completion-by-word)
-            ("C-n" . 'copilot-next-completion)
-            ("C-p" . 'copilot-previous-completion)))
+  ;; (use-package! copilot
+  ;;   :hook (prog-mode . copilot-mode)
+  ;;   :bind (:map copilot-completion-map
+  ;;           ("<tab>" . 'copilot-accept-completion)
+  ;;           ("TAB" . 'copilot-accept-completion)
+  ;;           ("C-TAB" . 'copilot-accept-completion-by-word)
+  ;;           ("C-<tab>" . 'copilot-accept-completion-by-word)
+  ;;           ("C-n" . 'copilot-next-completion)
+  ;;           ("C-p" . 'copilot-previous-completion)))
 
   ;; copilot-chat
   (use-package! copilot-chat
