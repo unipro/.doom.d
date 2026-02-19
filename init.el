@@ -47,7 +47,7 @@
         +defaults)       ; default popup rules
        ;;smooth-scroll     ; So smooth you won't believe it's not butter
        ;;tabs              ; a tab bar for Emacs
-       (treemacs +lsp)     ; a project drawer, like neotree but cooler
+       treemacs          ; a project drawer, like neotree but cooler
        unicode           ; extended unicode support for various languages
        (vc-gutter +pretty) ; vcs diff in the fringe
        vi-tilde-fringe   ; fringe tildes to mark beyond EOB
@@ -94,7 +94,7 @@
        ;;ansible
        ;;biblio            ; Writes a PhD for you (citation needed)
        ;;collab            ; buffers with friends
-       (debugger +lsp)     ; FIXME stepping through code, to help you add bugs
+       debugger            ; FIXME stepping through code, to help you add bugs
        direnv
        docker
        editorconfig      ; let someone else argue about tabs vs spaces
@@ -170,14 +170,11 @@
        ;;ocaml             ; an objective camel
        (org              ; organize your plain life in plain text
         +dragndrop       ; drag & drop files/images into org buffers
-        ;;+hugo          ; use Emacs for hugo blogging
         +noter           ; enhanced PDF notetaking
         +jupyter         ; ipython/jupyter support for babel
         +pandoc          ; export-with-pandoc support
         +gnuplot         ; who doesn't like pretty pictures
-        ;;+pomodoro        ; be fruitful with the tomato technique
-        +present         ; using org-mode for presentations
-        +roam2)          ; wander around notes
+        +present)        ; using org-mode for presentations
        ;;php               ; perl's insecure younger brother
        ;;plantuml          ; diagrams for confusing people more
        ;;graphviz          ; diagrams for confusing yourself even more
