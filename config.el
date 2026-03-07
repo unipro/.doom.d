@@ -292,6 +292,16 @@
   (setq-default java-ts-mode-indent-offset 4)
   (setq-default js-ts-mode-indent-offset 4))
 
+;; exec-path-from-shell
+(use-package! exec-path-from-shell
+  :when (memq window-system '(mac ns))
+  :config
+  (setq exec-path-from-shell-arguments '("-l" "-i")) ; Login + Interactive shell
+  (exec-path-from-shell-initialize))
+
+(setenv "CC" "/opt/homebrew/opt/llvm/bin/clang")
+(setenv "CXX" "/opt/homebrew/opt/llvm/bin/clang++")
+
 ;; lisp
 (add-hook! '(emacs-lisp-mode-hook lisp-mode-hook common-lisp-mode-hook)
   (setq-local lisp-indent-offset 2))
