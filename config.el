@@ -299,8 +299,11 @@
   (setq exec-path-from-shell-arguments '("-l" "-i")) ; Login + Interactive shell
   (exec-path-from-shell-initialize))
 
-(setenv "CC" "/opt/homebrew/opt/llvm/bin/clang")
-(setenv "CXX" "/opt/homebrew/opt/llvm/bin/clang++")
+;; Resolve system build error in macOS Emacs when CC is set to gcc-xx
+(when (featurep :system 'macos)
+  (when (file-executable-p "/opt/homebrew/opt/llvm/bin/clang")
+    (setenv "CC" "/opt/homebrew/opt/llvm/bin/clang")
+    (setenv "CXX" "/opt/homebrew/opt/llvm/bin/clang++")))
 
 ;; lisp
 (add-hook! '(emacs-lisp-mode-hook lisp-mode-hook common-lisp-mode-hook)
