@@ -174,7 +174,8 @@
         +jupyter         ; ipython/jupyter support for babel
         +pandoc          ; export-with-pandoc support
         +gnuplot         ; who doesn't like pretty pictures
-        +present)        ; using org-mode for presentations
+        +present         ; using org-mode for presentations
+        +roam2)          ; wander around notes
        ;;php               ; perl's insecure younger brother
        ;;plantuml          ; diagrams for confusing people more
        ;;graphviz          ; diagrams for confusing yourself even more
