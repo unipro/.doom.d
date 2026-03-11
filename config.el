@@ -327,9 +327,6 @@
 (after! sh-script
   (set-company-backend! 'sh-mode nil))
 
-;; realgud-lldb
-(use-package! realgud-lldb)
-
 ;; eglot
 (after! eglot
   (setq-default eglot-inlay-hints-mode nil)

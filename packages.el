@@ -8,14 +8,8 @@
 ;; avy
 (package! avy)
 
-;; realgud-lldb
-(package! realgud-lldb)
-
 ;; exec-path-from-shell
 (package! exec-path-from-shell)
-
-;; nginx-mode
-(package! nginx-mode)
 
 ;; dotenv
 (package! dotenv-mode)
