@@ -23,15 +23,26 @@
 ;; web-server
 (package! web-server)
 
-;; claude-code
-(package! claude-code-ide
-  :recipe (:host github :repo "manzaltu/claude-code-ide.el"))
-
 ;; copilot
 ;; (package! copilot
 ;;   :recipe (:host github :repo "copilot-emacs/copilot.el" :files ("*.el" "dist")))
 (package! copilot-chat
   :recipe (:host github :repo "chep/copilot-chat.el" :files ("*.el")))
+
+;; MCP (Model Context Protocol) — direct Emacs integration
+;; Complements claude-code-ide; controls MCP servers from within Emacs
+(package! mcp
+  :recipe (:host github :repo "lizqwerscott/mcp.el"))
+
+;; AI response blocks inside Org-mode documents
+(package! org-ai
+  :recipe (:host github :repo "rksm/org-ai"))
+
+;; Claude Code IDE (keep existing — runs inside eat terminal)
+;; (package! claude-code
+;;   :recipe (:host github :repo "stevemolitor/claude-code.el"))
+(package! claude-code-ide
+  :recipe (:host github :repo "manzaltu/claude-code-ide.el"))
 
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;; (package! some-package)

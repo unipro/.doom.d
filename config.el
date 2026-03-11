@@ -10,8 +10,8 @@
       user-mail-address "unipro.kr@gmail.com")
 
 ;; performance tuning
-(setq gc-cons-threshold 100000000)              ; 100mb
-(setq read-process-output-max (* 1024 1024))    ; 1mb
+(setq gc-cons-threshold 100000000               ; 100mb
+      read-process-output-max (* 1024 1024))    ; 1mb
 
 ;; basic settings
 (setq-default window-combination-resize t ; Take new window space from all other windows
@@ -53,12 +53,9 @@
             minibuffer-local-isearch-map
             read-expression-map)
           (cond ((modulep! :completion ivy)
-                 '(ivy-minibuffer-map
-                   ivy-switch-buffer-map))
+                 '(ivy-minibuffer-map ivy-switch-buffer-map))
                 ((modulep! :completion helm)
-                 '(helm-map
-                   helm-rg-map
-                   helm-read-file-map))))
+                 '(helm-map helm-rg-map helm-read-file-map))))
   "A list of all the keymaps used for the minibuffer.")
 
 ;; OS specific fixes
@@ -220,28 +217,30 @@
         try-complete-lisp-symbol))
 
 ;; avy
-(setq avy-all-windows nil
-      avy-all-windows-alt t
-      avy-background t
-      ;; the unpredictability of this (when enabled) makes it a poor default
-  avy-single-candidate-jump nil)
-(global-set-key (kbd "C-:") 'avy-goto-char)
-(global-set-key (kbd "C-'") 'avy-goto-char-2)
-(global-set-key (kbd "M-g l") 'avy-goto-line)
-(global-set-key (kbd "M-g w") 'avy-goto-word-1)
+(after! avy
+  (setq avy-all-windows nil
+        avy-all-windows-alt t
+        avy-background t
+        ;; the unpredictability of this (when enabled) makes it a poor default
+        avy-single-candidate-jump nil)
+  (global-set-key (kbd "C-:") 'avy-goto-char)
+  (global-set-key (kbd "C-'") 'avy-goto-char-2)
+  (global-set-key (kbd "M-g l") 'avy-goto-line)
+  (global-set-key (kbd "M-g w") 'avy-goto-word-1))
 
 ;; smartparens
 (use-package! smartparens)
 
 ;; like paredit keybinding
-(map! :after smartparens
-      :map smartparens-mode-map
-      "M-(" #'sp-wrap-round
-      "M-s" #'sp-splice-sexp
-      "C-)" #'sp-forward-slurp-sexp
-      "C-}" #'sp-forward-barf-sexp
-      "C-(" #'sp-backward-slurp-sexp
-      "C-{" #'sp-backward-barf-sexp)
+(map!
+  :after smartparens
+  :map smartparens-mode-map
+  "M-(" #'sp-wrap-round
+  "M-s" #'sp-splice-sexp
+  "C-)" #'sp-forward-slurp-sexp
+  "C-}" #'sp-forward-barf-sexp
+  "C-(" #'sp-backward-slurp-sexp
+  "C-{" #'sp-backward-barf-sexp)
 
 ;; man
 (after! woman
@@ -340,83 +339,62 @@
   (after! flycheck
     (setq-default flycheck-disabled-checkers '(proselint))))
 
-;; claude-code
-(use-package! claude-code-ide
-  :commands (claude-code-ide claude-code-ide-menu)
-  :bind (("C-c C-'" . claude-code-ide-menu)                ; Main menu
-         ("C-c ' m" . claude-code-ide-menu)                ; Main menu
-         ;; Session Management
-         ("C-c ' s" . claude-code-ide)                     ; Start new Claude Code session
-         ("C-c ' q" . claude-code-ide-quit)                ; Quit Claude Code
-         ;; Navigation
-         ("C-c ' b" . claude-code-ide-switch-to-buffer)    ; Switch to project’s Claude buffer
-         ("C-c ' r" . claude-code-ide-toggle-recent)       ; Toggle recent session
-         ;; Interaction
-         ("C-c ' i" . claude-code-ide-insert-at-mentioned) ; Insert selection
-         ("C-c ' p" . claude-code-ide-send-prompt)         ; Send prompt from minibuffer
-         ("C-c ' e" . claude-code-ide-send-escape)         ; Send escape key
-         ("C-c ' n" . claude-code-ide-insert-newline))     ; Insert newline
-  :config
-  (claude-code-ide-emacs-tools-setup)
-
-  ;; notification settings
-  (setq claude-code-notification-function
-    (cond
-      ((featurep :system 'macos)
-        (lambda (title message)
-          (call-process "osascript" nil nil nil
-            "-e" (format "display notification \"%s\" with title \"%s\" sound name \"Glass\""
-                   message title))))
-      ((featurep :system 'windows)
-        (lambda (title message)
-          (call-process "powershell" nil nil nil
-            "-NoProfile" "-Command"
-            (concat "[Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime] | Out-Null; "
-              "$template = '<toast><visual><binding template=\"ToastGeneric\"><text>" title "</text><text>" message "</text></binding></visual></toast>'; "
-              "$xml = New-Object Windows.Data.Xml.Dom.XmlDocument; "
-              "$xml.LoadXml($template); "
-              "$toast = [Windows.UI.Notifications.ToastNotification]::new($xml); "
-              "[Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier('Emacs').Show($toast)"))))
-      ((featurep :system 'linux)
-        (if (executable-find "notify-send")
-          (lambda (title message)
-            (call-process "notify-send" nil nil nil title message))
-          (lambda (title message)
-            (message "[%s] %s" title message))))
-      (t (lambda (title message)
-           (message "[%s] %s" title message))))))
-
 ;; gptel
 (use-package! gptel
   :config
-  ;; Copilot
-  (condition-case err
-      (gptel-make-gh-copilot "Copilot")
-    (error
-     (message "[gptel] Copilot backend disabled (%s)"
-              (error-message-string err)))))
+  ;; TODO
+  )
 
-(when (not (featurep :system 'windows))
-  ;; copilot
-  ;; accept completion from copilot and fallback to company
-  ;; (use-package! copilot
-  ;;   :hook (prog-mode . copilot-mode)
-  ;;   :bind (:map copilot-completion-map
-  ;;           ("<tab>" . 'copilot-accept-completion)
-  ;;           ("TAB" . 'copilot-accept-completion)
-  ;;           ("C-TAB" . 'copilot-accept-completion-by-word)
-  ;;           ("C-<tab>" . 'copilot-accept-completion-by-word)
-  ;;           ("C-n" . 'copilot-next-completion)
-  ;;           ("C-p" . 'copilot-previous-completion)))
+;; copilot-chat
+(use-package! copilot-chat
+  :bind (:map global-map
+         ("C-c C-y" . copilot-chat-yank)
+         ("C-c M-y" . copilot-chat-yank-pop)
+         ("C-c C-M-y" . (lambda () (interactive) (copilot-chat-yank-pop -1))))
+  :init
+  (add-hook 'git-commit-setup-hook 'copilot-chat-insert-commit-message))
 
-  ;; copilot-chat
-  (use-package! copilot-chat
-    :bind (:map global-map
-            ("C-c C-y" . copilot-chat-yank)
-            ("C-c M-y" . copilot-chat-yank-pop)
-            ("C-c C-M-y" . (lambda () (interactive) (copilot-chat-yank-pop -1))))
-    :init
-    (add-hook 'git-commit-setup-hook 'copilot-chat-insert-commit-message)))
+;; org-ai
+(use-package! org-ai
+  :hook (org-mode . org-ai-mode)
+  :config
+  ;; TODO
+  )
+
+;; claude-code
+(use-package! claude-code-ide
+  :commands (claude-code-ide claude-code-ide-menu)
+  :config
+  (claude-code-ide-emacs-tools-setup))
+
+;; copilot
+;; accept completion from copilot and fallback to company
+;; (use-package! copilot
+;;   :hook (prog-mode . copilot-mode)
+;;   :bind (:map copilot-completion-map
+;;           ("<tab>" . 'copilot-accept-completion)
+;;           ("TAB" . 'copilot-accept-completion)
+;;           ("C-TAB" . 'copilot-accept-completion-by-word)
+;;           ("C-<tab>" . 'copilot-accept-completion-by-word)
+;;           ("C-n" . 'copilot-next-completion)
+;;           ("C-p" . 'copilot-previous-completion)))
+
+;; mcp
+(use-package! mcp
+  :after gptel)
+
+(map! :leader
+  (:prefix-map ("'" . "AI")
+    ;; claude-code-ide
+    :desc "Claude Code"             "s" #'claude-code-ide
+    :desc "Menu (Claude Code)"      "m" #'claude-code-ide-menu
+    :desc "Quit Claude Code"        "q" #'claude-code-ide-quit
+    :desc "Switch to Claude buffer" "b" #'claude-code-ide-switch-to-buffer
+    :desc "Send prompt"             "p" #'claude-code-ide-send-prompt
+    ;; gptel
+    :desc "Chat (gptel)"            "a" #'gptel
+    :desc "Menu (switch backend)"   "m" #'gptel-menu
+    :desc "Inline rewrite"          "r" #'gptel-rewrite))
 
 ;; auto-customisations
 (setq-default custom-file (expand-file-name "custom.el" doom-user-dir))
