@@ -5,9 +5,6 @@
 ;; on the command line, then restart Emacs for the changes to take effect -- or
 ;; use 'M-x doom/reload'.
 
-;; avy
-(package! avy)
-
 ;; exec-path-from-shell
 (package! exec-path-from-shell)
 

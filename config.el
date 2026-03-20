@@ -216,18 +216,6 @@
         try-complete-lisp-symbol-partially
         try-complete-lisp-symbol))
 
-;; avy
-(after! avy
-  (setq avy-all-windows nil
-        avy-all-windows-alt t
-        avy-background t
-        ;; the unpredictability of this (when enabled) makes it a poor default
-        avy-single-candidate-jump nil)
-  (global-set-key (kbd "C-:") 'avy-goto-char)
-  (global-set-key (kbd "C-'") 'avy-goto-char-2)
-  (global-set-key (kbd "M-g l") 'avy-goto-line)
-  (global-set-key (kbd "M-g w") 'avy-goto-word-1))
-
 ;; smartparens
 (use-package! smartparens)
 
@@ -254,9 +242,6 @@
 
 ;; treemacs
 (use-package! treemacs
-  :bind
-  (:map global-map
-   ("M-o" . treemacs-select-window))
   :config
   (treemacs-load-theme "Default")
   (add-to-list 'treemacs-pre-file-insert-predicates #'treemacs-is-file-git-ignored?))
