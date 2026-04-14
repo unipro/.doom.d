@@ -289,6 +289,18 @@
     (setenv "CC" "/opt/homebrew/opt/llvm/bin/clang")
     (setenv "CXX" "/opt/homebrew/opt/llvm/bin/clang++")))
 
+;; (after! compile
+;;   (add-to-list 'compilation-error-regexp-alist-alist
+;;                '(rust-test-panic
+;;                  "^thread '.*' .*panicked at \\([^:\n]+\\):\\([0-9]+\\):\\([0-9]+\\):$"
+;;                  1 2 3))
+;;   (add-to-list 'compilation-error-regexp-alist-alist
+;;                '(rust-test-panic
+;;                  "^thread '.*' .*panicked at \\([^:\n]+\\):\\([0-9]+\\):\\([0-9]+\\):$"
+;;                  1 2 3))
+;;   (add-to-list 'compilation-error-regexp-alist 'rust-test-panic)
+;;   (add-to-list 'compilation-error-regexp-alist 'rust-test-panic-generic))
+
 ;; lisp
 (add-hook! '(emacs-lisp-mode-hook lisp-mode-hook common-lisp-mode-hook)
   (setq-local lisp-indent-offset 2))
@@ -339,6 +351,18 @@
   :init
   (add-hook 'git-commit-setup-hook 'copilot-chat-insert-commit-message))
 
+;; copilot
+;; accept completion from copilot and fallback to company
+(use-package! copilot
+  ;; :hook (prog-mode . copilot-mode)
+  :bind (:map copilot-completion-map
+          ("<tab>" . 'copilot-accept-completion)
+          ("TAB" . 'copilot-accept-completion)
+          ("C-TAB" . 'copilot-accept-completion-by-word)
+          ("C-<tab>" . 'copilot-accept-completion-by-word)
+          ("C-n" . 'copilot-next-completion)
+          ("C-p" . 'copilot-previous-completion)))
+
 ;; org-ai
 (use-package! org-ai
   :hook (org-mode . org-ai-mode)
@@ -371,15 +395,18 @@
 (map! :leader
   (:prefix-map ("'" . "AI")
     ;; claude-code-ide
-    :desc "Claude Code"             "s" #'claude-code-ide
+    :desc "Claude Code"             "c" #'claude-code-ide
     :desc "Menu (Claude Code)"      "m" #'claude-code-ide-menu
     :desc "Quit Claude Code"        "q" #'claude-code-ide-quit
     :desc "Switch to Claude buffer" "b" #'claude-code-ide-switch-to-buffer
     :desc "Send prompt"             "p" #'claude-code-ide-send-prompt
+    :desc "Toggle Claude Code"      "t" #'claude-code-ide-toggle
     ;; gptel
-    :desc "Chat (gptel)"            "a" #'gptel
-    :desc "Menu (switch backend)"   "m" #'gptel-menu
-    :desc "Inline rewrite"          "r" #'gptel-rewrite))
+    ;; :desc "Chat (gptel)"            "a" #'gptel
+    ;; :desc "Menu (switch backend)"   "m" #'gptel-menu
+    ;; :desc "Inline rewrite"          "r" #'gptel-rewrite
+    ;; copilot
+    :desc "Copilot"                "C" #'copilot-mode))
 
 ;; auto-customisations
 (setq-default custom-file (expand-file-name "custom.el" doom-user-dir))

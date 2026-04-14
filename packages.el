@@ -21,10 +21,10 @@
 (package! web-server)
 
 ;; copilot
-;; (package! copilot
-;;   :recipe (:host github :repo "copilot-emacs/copilot.el" :files ("*.el" "dist")))
 (package! copilot-chat
   :recipe (:host github :repo "chep/copilot-chat.el" :files ("*.el")))
+(package! copilot
+  :recipe (:host github :repo "copilot-emacs/copilot.el" :files ("*.el")))
 
 ;; MCP (Model Context Protocol) — direct Emacs integration
 ;; Complements claude-code-ide; controls MCP servers from within Emacs
