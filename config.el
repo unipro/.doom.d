@@ -253,6 +253,9 @@
 
 ;; treemacs
 (use-package! treemacs
+  :bind
+  (:map global-map
+    ("M-o" . treemacs-select-window))
   :config
   (treemacs-load-theme "Default")
   (add-to-list 'treemacs-pre-file-insert-predicates #'treemacs-is-file-git-ignored?))
