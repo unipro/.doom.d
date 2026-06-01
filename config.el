@@ -411,6 +411,11 @@
     ;; :desc "Copilot"                "C" #'copilot-mode
     ))
 
+;; Show the modeline in vterm buffer
+(remove-hook 'vterm-mode-hook  #'hide-mode-line-mode)
+(after! vterm
+  (set-popup-rule! "^\\*vterm" :size 0.25 :vslot -4 :select t :quit nil :ttl 0 :modeline t))
+
 ;; auto-customisations
 (setq-default custom-file (expand-file-name "custom.el" doom-user-dir))
 (when (file-exists-p custom-file)
